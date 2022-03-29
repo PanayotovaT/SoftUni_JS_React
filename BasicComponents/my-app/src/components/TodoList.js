@@ -17,6 +17,7 @@ function TodoList() {
             <ul>
                 {todos.map(x => <TodoListItem text={x} />)}
             </ul>
+            <button onClick={()=> setTodos([...todos, 'Modified'])}>Modify</button>
         </React.Fragment>
 
     )

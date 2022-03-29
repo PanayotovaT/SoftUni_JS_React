@@ -1,16 +1,12 @@
-import React from 'react';
+function TodoList() {
+    return (
+        <ul>
+            <li>Clean your room</li>
+            <li>Do exercise</li>
+            <li>Read a book</li>
+        </ul>
+    )
 
-class TodoList extends React.Component {
-
-    render() {
-        return (
-            <ul>
-                <li>Clean your room</li>
-                <li>Do exercise</li>
-                <li>Read a book</li>
-            </ul>
-        )
-    }
 }
 
 export default TodoList;

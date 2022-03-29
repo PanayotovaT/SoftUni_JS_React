@@ -9,7 +9,6 @@ function App() {
       </header>
 
       <main>
-        <h2>Tasks</h2>
         <TodoList />
       </main>
 

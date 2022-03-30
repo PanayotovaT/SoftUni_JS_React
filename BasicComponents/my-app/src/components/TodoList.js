@@ -36,6 +36,7 @@ function TodoList() {
                 <TodoListItem text={count}></TodoListItem>
             </ul>
             <button onClick={()=> setCount(count + 1)}>+</button>
+            <button onClick={setCount.bind(null, count + 1)}>+</button>
         </>
 
     )

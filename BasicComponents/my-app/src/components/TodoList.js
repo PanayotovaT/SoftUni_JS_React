@@ -28,14 +28,24 @@ import TodoListItem from './TodoListItem';
 function TodoList() {
 
     let [count, setCount] = useState(0);
+    let [name, setName] = useState('');
 
+    const addButtonHandler = () => {
+        setCount(count + 1);
+        setName('Alex')
+    }
+
+    const inputChangeHandler = (e) => {
+        setName(e.target.value);
+    }
     return (
         <>
             <h2>Counter</h2>
             <ul>
-                <TodoListItem text={count}></TodoListItem>
+                <TodoListItem text={count} name={name}></TodoListItem>
             </ul>
-            <button onClick={()=> setCount(count + 1)}>+</button>
+            <input type="text" onChange={inputChangeHandler} />
+            <button onClick={addButtonHandler}>+</button>
             <button onClick={setCount.bind(null, count + 1)}>+</button>
         </>
 

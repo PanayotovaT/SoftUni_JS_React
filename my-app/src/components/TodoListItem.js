@@ -1,11 +1,15 @@
 const TodoListItem = (props) => {
-    if(props.count > 0) {
-         return (
-            <li style={{color: 'darkred'}}>{props.count} - {props.name}</li>
-         );
+    let color = 'black';
+
+    if (props.count > 3) {
+        color = 'darkblue';
+
+    } else if (props.count > 0) {
+        color = 'darkred';
     }
+
     return (
-        <li style={{color: props.color}}>{props.count} - {props.name}</li>
+        <li style={{ color }}>{props.count} - {props.name}</li>
     );
 }
 

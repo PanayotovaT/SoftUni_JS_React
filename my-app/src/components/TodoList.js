@@ -42,9 +42,10 @@ function TodoList() {
         <>
             <h2>Counter</h2>
             <ul>
-                <TodoListItem text={count} name={name}></TodoListItem>
+                <TodoListItem count={count} name={name}></TodoListItem>
             </ul>
-            <input type="text" onChange={inputChangeHandler} />
+            {/* <input type="text" onChange={inputChangeHandler} /> */}
+            <input type="text" onBlur={inputChangeHandler} />
             <button onClick={addButtonHandler}>+</button>
             <button onClick={setCount.bind(null, count + 1)}>+</button>
         </>

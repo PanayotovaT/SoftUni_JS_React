@@ -45,9 +45,15 @@ function TodoList() {
     }
     return (
         <>
-            <h2>Counter - {name}</h2>
-            {name ? name && name == 'Alex' ? <h3>Alex is a boy!</h3> : <h3>Sofi is a girl!</h3> : ''}
-            
+            {name && <h2>Counter - {name}</h2>}
+            {
+            name 
+                ? name == 'Alex'
+                    ? <h3>Alex is a boy!</h3>
+                    : <h3>Sofi is a girl!</h3>
+                : ''
+            }
+
             <ul>
                 <TodoListItem count={count} name={name}></TodoListItem>
             </ul>

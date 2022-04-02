@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import TodoListItem from './TodoListItem';
 
 // function TodoList() {
@@ -35,33 +35,19 @@ function TodoList() {
         setName('Alex')
     }
 
-    const subtractButtonHandler = () => {
-        setCount(count - 1);
-        setName('Sofi')
-    }
-
     const inputChangeHandler = (e) => {
         setName(e.target.value);
     }
     return (
         <>
-            {name && <h2>Counter - {name}</h2>}
-            {
-            name 
-                ? name == 'Alex'
-                    ? <h3>Alex is a boy!</h3>
-                    : <h3>Sofi is a girl!</h3>
-                : ''
-            }
-
+            <h2>Counter</h2>
             <ul>
                 <TodoListItem count={count} name={name}></TodoListItem>
             </ul>
             {/* <input type="text" onChange={inputChangeHandler} /> */}
             <input type="text" onBlur={inputChangeHandler} />
             <button onClick={addButtonHandler}>+</button>
-            <button onClick={subtractButtonHandler}>-</button>
-            {/* <button onClick={setCount.bind(null, count + 1)}>+</button> */}
+            <button onClick={setCount.bind(null, count + 1)}>+</button>
         </>
 
     )

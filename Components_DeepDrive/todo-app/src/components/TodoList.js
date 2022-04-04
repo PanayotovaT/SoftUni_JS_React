@@ -1,13 +1,16 @@
+// import uniqid from 'uniqid';
+import TodoItem from "./TodoITem";
+
 export default function TodoList() {
 
     const todos = [
-        'Clean my room',
-        'Learn React',
-        'Go shopping'
+        {id:1,text: 'Clean my room'},
+        {id:2, text: 'Learn React'},
+       { id:3, text:'Go shopping'}
     ]
     return (
         <ul>
-           {todos.map(x => <li key={x}>{x}</li>)} 
+           {todos.map(x => <TodoItem key={x.id} todo={x} />)} 
         </ul>
     );
 

@@ -1,4 +1,4 @@
-// import uniqid from 'uniqid';
+import uniqid from 'uniqid';
 import { useState, useEffect } from 'react';
 import TodoItem from "./TodoITem";
 
@@ -16,7 +16,7 @@ export default function TodoList() {
 
   const onTodoInputBlur = (e) => {
     let todo = {
-        id: todos.length + 1,
+        id: uniqid(),
         text: e.target.value
     }
 

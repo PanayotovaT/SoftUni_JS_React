@@ -1,8 +1,9 @@
 export default function TodoItem({
-    todo
+    todo,
+    onDelete
 }) {
 
     return ( 
-        <li >{todo.text}</li>
+        <li >{todo.text} <button onClick={()=> onDelete(todo.id)}>[X]</button></li>
     );
 }

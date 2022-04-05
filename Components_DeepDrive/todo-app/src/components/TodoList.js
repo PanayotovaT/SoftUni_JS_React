@@ -8,6 +8,7 @@ export default function TodoList() {
         { id: 2, text: 'Learn React' },
         { id: 3, text: 'Go shopping' },
     ]);
+    console.log('render');
 
     useEffect(() => {
         console.log('mounted')
@@ -17,20 +18,25 @@ export default function TodoList() {
     let todo = {
         id: todos.length + 1,
         text: e.target.value
-
     }
 
-    setTodos([
-        ...todos,
+    setTodos((state) =>[
+        ...state,
         todo
     ]);
+    e.target.value= '';
+  }
+
+  const deleteTodoItemClickHandler=(id) => {
+    console.log('Delete ', id);
+    setTodos(oldTodos =>oldTodos.filter(x => x.id != id));
   }
     return (
         <>
         <label htmlFor="todo-name">Add Todo</label>
         <input type="text" id="todo-name" onBlur={onTodoInputBlur} name="todo-name" />
             <ul>
-                {todos.map(x => <TodoItem key={x.id} todo={x} />)}
+                {todos.map(x => <TodoItem key={x.id} todo={x} onDelete={deleteTodoItemClickHandler} />)}
             </ul>
         </>
     );

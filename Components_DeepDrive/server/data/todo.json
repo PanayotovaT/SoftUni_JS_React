@@ -1,0 +1,30 @@
+[
+    {"id": 1,
+        "text": "Give doga bath",
+        "idDone": false
+    },
+    {"id": 2,
+        "text": "Go for a walk",
+        "idDone": false
+    },
+    {"id": 3,
+        "text": "Clean your room",
+        "idDone": false
+    },
+    {"id": 4,
+        "text": "Learn react",
+        "idDone": false
+    },
+    {"id": 5,
+        "text": "Read a book",
+        "idDone": false
+    },
+    {"id": 6,
+        "text": "Go shopping",
+        "idDone": false
+    },
+    {"id": 7,
+        "text": "Feed cat",
+        "idDone": false
+    }
+]

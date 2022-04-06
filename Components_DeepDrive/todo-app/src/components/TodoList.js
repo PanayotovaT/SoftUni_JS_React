@@ -1,6 +1,7 @@
 import uniqid from 'uniqid';
 import { useState, useEffect } from 'react';
 import TodoItem from "./TodoITem";
+import { createTodo } from '../services/todoService';
 
 const API_URL = 'http://localhost:3030/jsonstore';
 
@@ -18,13 +19,14 @@ export default function TodoList() {
             })
     }, []);
 
-    const onTodoInputBlur = (e) => {
+    const onTodoInputBlur = async (e) => {
         let todo = {
             id: uniqid(),
             text: e.target.value,
             isDone: false
         }
 
+        await createTodo(todo);
         setTodos((state) => [
             ...state,
             todo

@@ -1,5 +1,12 @@
+label {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
 .todo-item {
-    color: red;
+    color: darkblue;
+    margin-bottom: 4px;
+    font-size: 20px;
 }
 
 .todo-item-done {
@@ -7,4 +14,10 @@
     font-weight: bold;
     color: darkred;
     font-style: italic;
+}
+
+.list-item-btn {
+    margin-left: 15px;
+    padding:2px 10px;
+    font-weight: bold;
 }

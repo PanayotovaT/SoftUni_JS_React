@@ -14,12 +14,18 @@ export default function TodoItem({
             console.log('Unmounted - ', todo.id);
         }
     }, [todo.id]);
+    let todoItemClasses = ['todo-item'];
+    if(todo.isDone) {
+
+        todoItemClasses.push('todo-item-done');
+        console.log(todo.isDone)
+    }
     
     return (
         // <li onClick={() => onClick(todo.id)} className={styles['todo-item']}> --name.module.css
-        <li onClick={() => onClick(todo.id)} className={todo.isDone ? 'todo-item-done': ''}>
+        <li onClick={() => onClick(todo.id)} className={todoItemClasses.join(' ')}>
             {todo.text}
-            <button onClick={() => onDelete(todo.id)}>[X]</button>
+            <button className="list-item-btn" onClick={(e) => onDelete(e, todo.id)}>[X]</button>
         </li>
     );
 }

@@ -2,16 +2,20 @@ import uniqid from 'uniqid';
 import { useState, useEffect } from 'react';
 import TodoItem from "./TodoITem";
 
+const API_URL = 'http://localhost:3030/jsonstore';
+
 export default function TodoList() {
-    const [todos, setTodos] = useState([
-        { id: 1, text: 'Clean my room', isDone: false },
-        { id: 2, text: 'Learn React', isDone: false },
-        { id: 3, text: 'Go shopping', isDone: false },
-    ]);
+    const [todos, setTodos] = useState([]);
     console.log('render');
 
     useEffect(() => {
-        console.log('mounted')
+        console.log('mounted');
+        fetch(`${API_URL}/todo`)
+            .then(response => response.json())
+            .then(todosResult => {
+                console.log(todosResult);
+                setTodos(Object.values(todosResult));
+            })
     }, []);
 
     const onTodoInputBlur = (e) => {
@@ -28,7 +32,8 @@ export default function TodoList() {
         e.target.value = '';
     }
 
-    const deleteTodoItemClickHandler = (id) => {
+    const deleteTodoItemClickHandler = (e, id) => {
+        e.stopPropagation();
         console.log('Delete ', id);
         setTodos(oldTodos => oldTodos.filter(x => x.id != id));
     }
@@ -37,10 +42,15 @@ export default function TodoList() {
         console.log(id, ' - Toggle');
         setTodos(oldTodos => {
             let selectedTodo = oldTodos.find(x =>x.id == id);
+            let selectTodoIndex = oldTodos.findIndex(x => x.id ==id);
             let toggledTodo = {...selectedTodo, isDone: !selectedTodo.isDone};
-            let restTodos = oldTodos.filter(x => x.id  != id);
+            
 
-            return [...restTodos, toggledTodo];
+            return [
+                ...oldTodos.slice(0, selectTodoIndex),
+                toggledTodo,
+                ...oldTodos.slice(selectTodoIndex + 1)
+            ];
         })
     }
     return (

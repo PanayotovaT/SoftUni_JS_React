@@ -1,0 +1,10 @@
+.todo-item {
+    color: red;
+}
+
+.todo-item-done {
+    text-decoration: line-through;
+    font-weight: bold;
+    color: darkred;
+    font-style: italic;
+}

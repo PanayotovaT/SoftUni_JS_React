@@ -29,10 +29,12 @@ export default function TodoList() {
             isDone: false
         }
 
-        await createTodo(todo);
+        const createdTodo = await createTodo(todo);
+        console.log(createTodo);
+ 
         setTodos((state) => [
             ...state,
-            todo
+            createdTodo
         ]);
         e.target.value = '';
     }
@@ -46,7 +48,10 @@ export default function TodoList() {
         } catch (err) {
             console.log(err);
         }
-        setTodos(oldTodos => oldTodos.filter(x => x._id != _id));
+        setTodos(oldTodos =>{ 
+            let updatedTodos = oldTodos.filter(x => x._id != _id);
+            return [...updatedTodos];
+        });
     }
 
     const toggleTodoItemClickHandler = (id) => {
@@ -71,7 +76,7 @@ export default function TodoList() {
             <ul>
                 {todos.map(x =>
                     <TodoItem
-                        key={x.id}
+                        key={x._id}
                         todo={x}
                         onDelete={deleteTodoItemClickHandler}
                         onClick={toggleTodoItemClickHandler}

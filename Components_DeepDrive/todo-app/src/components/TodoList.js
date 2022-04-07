@@ -1,7 +1,7 @@
 import uniqid from 'uniqid';
 import { useState, useEffect } from 'react';
 import TodoItem from "./TodoITem";
-import { createTodo } from '../services/todoService';
+import { createTodo, deleteTodo } from '../services/todoService';
 
 const API_URL = 'http://localhost:3030/jsonstore';
 
@@ -15,7 +15,10 @@ export default function TodoList() {
             .then(response => response.json())
             .then(todosResult => {
                 console.log(todosResult);
-                setTodos(Object.values(todosResult));
+                let arrayTodos = Object.entries(todosResult);
+                const todos = arrayTodos.map(([key, value]) => Object.assign({}, { _id: key}, value));
+                console.log(todos);
+                setTodos(todos);
             })
     }, []);
 
@@ -34,19 +37,25 @@ export default function TodoList() {
         e.target.value = '';
     }
 
-    const deleteTodoItemClickHandler = (e, id) => {
+    const deleteTodoItemClickHandler = async (e, _id) => {
         e.stopPropagation();
-        console.log('Delete ', id);
-        setTodos(oldTodos => oldTodos.filter(x => x.id != id));
+        console.log(e);
+        console.log('Delete ', _id);
+        try {
+            await deleteTodo(_id);
+        } catch (err) {
+            console.log(err);
+        }
+        setTodos(oldTodos => oldTodos.filter(x => x._id != _id));
     }
 
     const toggleTodoItemClickHandler = (id) => {
         console.log(id, ' - Toggle');
         setTodos(oldTodos => {
-            let selectedTodo = oldTodos.find(x =>x.id == id);
-            let selectTodoIndex = oldTodos.findIndex(x => x.id ==id);
-            let toggledTodo = {...selectedTodo, isDone: !selectedTodo.isDone};
-            
+            let selectedTodo = oldTodos.find(x => x._id == id);
+            let selectTodoIndex = oldTodos.findIndex(x => x._id == id);
+            let toggledTodo = { ...selectedTodo, isDone: !selectedTodo.isDone };
+
 
             return [
                 ...oldTodos.slice(0, selectTodoIndex),

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Catalog from "./components/Catalog";
+import Catalog from "./components/GameCatalog/Catalog";
 import Create from "./components/Create";
 import Edit from "./components/Edit";
 import ErrorPage from "./components/ErrorPage";

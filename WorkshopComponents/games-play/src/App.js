@@ -10,18 +10,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import WelcomeWorld from "./components/WelcomeWorld";
 
-function App() { 
-const [page, setPage] = useState('/home');
-
-const routes = {
-  '/home':  <WelcomeWorld />,
-  '/games': <Catalog />,
-  '/login':   <Login />,
-  '/register':   <Register />,
-  '/create':   <Create />,
-  '/edit':    <Edit />,
-  '/game-details':    <GameDetails />,
-}
+function App() {
+  const [page, setPage] = useState('/home');
 
   const navigationChangeHandler = (path) => {
     console.log(path);
@@ -29,11 +19,29 @@ const routes = {
 
   }
 
+  const router = (path) => {
+    let pathName = path.split('/');
+    let rootPath = pathName[1];
+    let argument = pathName[2];
+
+    const routes = {
+      'home': <WelcomeWorld />,
+      'games': <Catalog navigationChangeHandler={navigationChangeHandler} />,
+      'login': <Login />,
+      'register': <Register />,
+      'create': <Create />,
+      'edit': <Edit />,
+      'details': <GameDetails id={argument} />,
+    }
+
+    return routes[rootPath];
+  }
+
   return (
     <div id="box">
       <Header navigationChangeHandler={navigationChangeHandler} />
       <main id="main-content">
-        {routes[page] || <ErrorPage />}
+        {router(page) || <ErrorPage />}
       </main>
 
     </div>

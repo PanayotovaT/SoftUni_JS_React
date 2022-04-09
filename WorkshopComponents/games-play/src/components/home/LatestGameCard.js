@@ -16,7 +16,13 @@ const LatestGameCard = ({
                 <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
             </div>
             <div className="data-buttons">
-                <a href={`/details/${game._id}`} className="btn details-btn" onClick={onDetailsClick}>Details</a>
+                <a
+                    href={`/details/${game._id}`}
+                    className="btn details-btn"
+                    onClick={onDetailsClick}
+                >
+                    Details
+                </a>
             </div>
         </div>
     );

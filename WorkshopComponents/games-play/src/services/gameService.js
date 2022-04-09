@@ -10,3 +10,8 @@ export function getOne(id) {
     return fetch(`${baseUrl}/games/${id}`)
         .then(response => response.json());
 }
+
+export function getRecentGames() {
+    return fetch(`${baseUrl}/games?sortBy=_createdOn%20desc&distinct=category`)
+        .then(response => response.json());
+}

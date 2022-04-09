@@ -8,7 +8,7 @@ import GameDetails from "./components/GameDetails";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import WelcomeWorld from "./components/WelcomeWorld";
+import WelcomeWorld from "./components/home/WelcomeWorld";
 
 function App() {
   const [page, setPage] = useState('/home');
@@ -25,7 +25,7 @@ function App() {
     let argument = pathName[2];
 
     const routes = {
-      'home': <WelcomeWorld />,
+      'home': <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
       'games': <Catalog navigationChangeHandler={navigationChangeHandler} />,
       'login': <Login />,
       'register': <Register />,

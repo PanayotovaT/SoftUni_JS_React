@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Route } from 'react-router-dom';
 
 import Catalog from "./components/GameCatalog/Catalog";
 import Create from "./components/Create";
@@ -41,7 +42,7 @@ function App() {
     <div id="box">
       <Header navigationChangeHandler={navigationChangeHandler} />
       <main id="main-content">
-        {router(page) || <ErrorPage />}
+        <Route path="/" component={WelcomeWorld} />
       </main>
 
     </div>

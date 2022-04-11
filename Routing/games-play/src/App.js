@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Catalog from "./components/GameCatalog/Catalog";
 import Create from "./components/Create";
@@ -42,7 +42,15 @@ function App() {
     <div id="box">
       <Header navigationChangeHandler={navigationChangeHandler} />
       <main id="main-content">
-        <Route path="/" component={WelcomeWorld} />
+        <Switch>
+          <Route path="/" exact component={WelcomeWorld} />
+          <Route path="/games" component={Catalog} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/create" component={Create} />
+          <Route path="/edit" component={Edit} />
+        </Switch>
+          <Route path="/details/:id" component={GameDetails} />
       </main>
 
     </div>

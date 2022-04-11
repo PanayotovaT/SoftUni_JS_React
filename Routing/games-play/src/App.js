@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import Catalog from "./components/GameCatalog/Catalog";
 import Create from "./components/Create";
@@ -25,6 +24,14 @@ function App() {
           <Route path="/create" component={Create} />
           <Route path="/edit" component={Edit} />
           <Route path="/games/:gameId" component={GameDetails} />
+          <Route path="/custom">
+            <h2 className="custom-title">Custom Page</h2>
+            <p className="custom-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt veritatis numquam facere neque, voluptates consectetur deserunt tempora officia nostrum, consequatur dignissimos minima provident ad quidem sequi ipsum impedit laudantium atque.</p>
+          </Route>
+          <Route path="/logout" render={(props) => {
+              console.log('Logged Out');
+              return <Redirect to='/' />
+          }} />
         </Switch>
       </main>
 

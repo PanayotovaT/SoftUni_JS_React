@@ -12,45 +12,20 @@ import Register from "./components/Register";
 import WelcomeWorld from "./components/home/WelcomeWorld";
 
 function App() {
-  const [page, setPage] = useState('/home');
-
-  const navigationChangeHandler = (path) => {
-    console.log(path);
-    setPage(path);
-
-  }
-
-  const router = (path) => {
-    let pathName = path.split('/');
-    let rootPath = pathName[1];
-    let argument = pathName[2];
-
-    const routes = {
-      'home': <WelcomeWorld navigationChangeHandler={navigationChangeHandler} />,
-      'games': <Catalog navigationChangeHandler={navigationChangeHandler} />,
-      'login': <Login />,
-      'register': <Register />,
-      'create': <Create />,
-      'edit': <Edit />,
-      'details': <GameDetails id={argument} />,
-    }
-
-    return routes[rootPath];
-  }
 
   return (
     <div id="box">
-      <Header navigationChangeHandler={navigationChangeHandler} />
+      <Header />
       <main id="main-content">
         <Switch>
           <Route path="/" exact component={WelcomeWorld} />
-          <Route path="/games" component={Catalog} />
+          <Route path="/games" exact component={Catalog} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/create" component={Create} />
           <Route path="/edit" component={Edit} />
+          <Route path="/games/:gameId" component={GameDetails} />
         </Switch>
-          <Route path="/details/:id" component={GameDetails} />
       </main>
 
     </div>

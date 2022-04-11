@@ -2,12 +2,8 @@ import { Link } from "react-router-dom";
 
 const LatestGameCard = ({
     game,
-    navigationChangeHandler
 }) => {
-    const onDetailsClick = (e) => {
-        e.preventDefault();
-        navigationChangeHandler(`/details/${game._id}`);
-    }
+
     return (
         <div className="game">
             <div className="image-wrap">
@@ -19,9 +15,8 @@ const LatestGameCard = ({
             </div>
             <div className="data-buttons">
                 <Link
-                    to={`/details/${game._id}`}
+                    to={`/games/${game._id}`}
                     className="btn details-btn"
-                    onClick={onDetailsClick}
                 >
                     Details
                 </Link>

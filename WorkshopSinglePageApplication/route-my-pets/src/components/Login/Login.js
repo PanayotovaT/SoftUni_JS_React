@@ -1,10 +1,20 @@
+import  { useNavigate } from 'react-router-dom';
+
+import * as authService from '../../services/authService';
+
 const Login = () => {
+    const navigate = useNavigate();
 
     const onLogin = (e) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
         console.log(formData.get('email'));
+        let email = formData.get('email');
+        authService.login(email);
+
+        navigate('/')
+
     }
 
     return (

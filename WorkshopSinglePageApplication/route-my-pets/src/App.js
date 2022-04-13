@@ -1,4 +1,6 @@
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+
 import Create from './components/Create/Create';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
@@ -14,17 +16,16 @@ function App() {
       <Header />
 
       <main id="site-content">
-        <Home />
-        <Login />
-        <Register />
-        <Details />
-        <Create />
-        <Edit />
-        <MyPets />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/my-pets" element={<MyPets />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/create-pet" element={<Create />} />
+          <Route path="/edit-pet/:petId" element={<Edit />} />
+          <Route path="/pet-details/:petId" element={<Details />} />
+        </Routes>
       </main>
-
-
-
 
       <footer id="site-footer">
         <p>@PetMyPet</p>

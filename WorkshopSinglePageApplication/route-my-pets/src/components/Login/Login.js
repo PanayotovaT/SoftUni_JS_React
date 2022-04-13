@@ -2,7 +2,9 @@ import  { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService';
 
-const Login = () => {
+const Login = ({
+    onLoginHandler
+}) => {
     const navigate = useNavigate();
 
     const onLogin = (e) => {
@@ -13,6 +15,7 @@ const Login = () => {
         let email = formData.get('email');
         authService.login(email);
 
+        onLoginHandler(email);
         navigate('/')
 
     }

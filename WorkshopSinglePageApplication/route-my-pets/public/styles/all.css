@@ -190,3 +190,10 @@ textarea#description {
     padding: 10px;
     box-shadow: -8px -2px 28px -8px #000000;
 }
+
+.type-section {
+    text-align: center;
+}
+.type-section .type {
+    margin: 5px 5px;
+}

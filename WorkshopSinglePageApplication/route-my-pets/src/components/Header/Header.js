@@ -27,7 +27,7 @@ const Header = ({
         <header id="site-header">
             <nav className="navbar">
                 <section className="navbar-dashboard">
-                    <NavLink to="/">Dashboard</NavLink>
+                    <NavLink to="/home">Dashboard</NavLink>
                     {isAuthenticated
                         ? userNavigation
                         : guestNavigation

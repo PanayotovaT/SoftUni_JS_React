@@ -1,25 +1,28 @@
-import { useEffect, useState } from 'react';
-
-import * as petService from '../../services/petService';
-import PetCard from './PetCard';
+import { Routes, Route, Link } from 'react-router-dom';
+import CategoryPetList from '../PetList/CategoryPetList';
+import PetList from '../PetList/PetList';
 
 const Home = () => {
-    const [pets, setPets] = useState([]);
 
-    useEffect(() => {
-        petService.getAll()
-            .then(result => {
-                setPets(result);
-            })
-    }, []);
-console.log(pets);
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>
-            <ul className="other-pets-list">
-                {pets.map(x => <PetCard key={x._id} pet={x} / >)}
-            </ul>
-            <p className="no-pets">No pets in database!</p>
+            <section className="type-section">
+                <h3>Categories</h3>
+                <Link className="button type" to="">All</Link>
+                <Link className="button type" to="cat">Cat</Link>
+                <Link className="button type" to="dog">Dog</Link>
+                <Link className="button type" to="horse">Horse</Link>
+            </section>
+            <section>
+                <Routes>
+                    <Route path="/" element={<PetList />} />
+                    <Route path="/dog" element={<CategoryPetList type="dog" />} />
+                    <Route path="/horse" element={<CategoryPetList type="horse" />} />
+                    <Route path="/cat" element={<CategoryPetList type="cat" />} />
+                </Routes>
+            </section>
+
         </section>
     );
 };

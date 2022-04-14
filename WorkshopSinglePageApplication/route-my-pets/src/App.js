@@ -38,7 +38,7 @@ function App() {
 
       <main id="site-content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home/*" element={<Home />} />
           <Route path="/my-pets" element={<MyPets />} />
           <Route path="/login" element={<Login onLoginHandler={onLogin} />} />
           <Route path="/register" element={<Register />} />

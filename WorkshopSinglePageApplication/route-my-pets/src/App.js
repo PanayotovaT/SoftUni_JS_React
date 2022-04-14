@@ -44,7 +44,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/create-pet" element={<Create />} />
           <Route path="/edit-pet/:petId" element={<Edit />} />
-          <Route path="/pet-details/:petId" element={<Details />} />
+          <Route path="/details/:petId" element={<Details />} />
         </Routes>
       </main>
 

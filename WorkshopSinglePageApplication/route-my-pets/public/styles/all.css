@@ -61,7 +61,6 @@ li {
 }
 
 .img {
-    width: 15rem;
     position: relative;
     overflow: hidden;
     padding: 0rem;
@@ -73,7 +72,7 @@ img {
     left: 0;
     right: 0;
     width: 100%;
-    height: auto;
+    height: 300px;
     object-fit: cover;
 }
 

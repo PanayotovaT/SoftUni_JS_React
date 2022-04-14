@@ -20,3 +20,16 @@ export const getOne = async (petId) => {
 
     return pet;
 }
+
+export const create = async (pet) => {
+    const response = await fetch(`${baseUrl}/pets`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(pet)
+    });
+
+    const result = await response.json();
+    return result;
+}

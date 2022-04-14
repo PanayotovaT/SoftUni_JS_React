@@ -22,7 +22,7 @@ const Login = ({
 
     return (
         <section id="login-page" className="login">
-            <form id="login-form" onSubmit={onLogin}>
+            <form id="login-form" onSubmit={onLogin} method="POST">
                 <fieldset>
                     <legend>Login Form</legend>
                     <p className="field">

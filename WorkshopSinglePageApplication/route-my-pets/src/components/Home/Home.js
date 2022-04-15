@@ -1,4 +1,5 @@
 import { Routes, Route, Link } from 'react-router-dom';
+import Icon from './Icon/Icon';
 import CategoryPetList from '../PetList/CategoryPetList';
 import PetList from '../PetList/PetList';
 
@@ -22,7 +23,7 @@ const Home = () => {
                     <Route path="/cat" element={<CategoryPetList type="cat" />} />
                 </Routes>
             </section>
-
+            <Icon />
         </section>
     );
 };

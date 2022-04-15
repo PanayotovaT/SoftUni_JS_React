@@ -12,6 +12,8 @@ const CategoryPetList = ({
         petService.getAll()
             .then(result => {
                 setPets(result);
+            }).catch(err => {
+                return;
             })
     }, []);
     return (

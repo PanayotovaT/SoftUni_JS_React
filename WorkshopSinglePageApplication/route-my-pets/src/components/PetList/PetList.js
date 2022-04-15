@@ -5,12 +5,15 @@ import * as petService from '../../services/petService';
 
 const PetList = () => {
     const [pets, setPets] = useState([]);
-
     useEffect(() => {
         petService.getAll()
             .then(result => {
-                setPets(result);
+                    setPets(result);
+              
+            }).catch(err => {
+                return;
             })
+            
     }, []);
     return (
         <>

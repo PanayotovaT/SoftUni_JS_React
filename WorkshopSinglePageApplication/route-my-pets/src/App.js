@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 import * as authService from './services/authService';
@@ -11,7 +11,7 @@ import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import MyPets from './components/MyPets/MyPets';
 import Register from './components/Register/Register';
-import { trusted } from 'mongoose';
+import Logout from './components/Logout/Logout';
 
 function App() {
   const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '' });
@@ -32,12 +32,20 @@ function App() {
     })
   }
 
+  const onLogout = () => {
+    setUserInfo({
+      isAuthenticated: false,
+      username: null,
+    })
+
+  }
   return (
     <div id="container">
       <Header {...userInfo} />
 
       <main id="site-content">
         <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home/*" element={<Home />} />
           <Route path="/my-pets" element={<MyPets />} />
           <Route path="/login" element={<Login onLoginHandler={onLogin} />} />
@@ -45,6 +53,7 @@ function App() {
           <Route path="/create-pet" element={<Create />} />
           <Route path="/edit-pet/:petId" element={<Edit />} />
           <Route path="/details/:petId" element={<Details />} />
+          <Route path="/logout" element={<Logout onLogout={onLogout}/>} />
         </Routes>
       </main>
 

@@ -1,7 +1,25 @@
 .App {
   text-align: center;
+  font-family: Helvetica, sans-serif
 }
 
 span {
   display: block;
+}
+
+.form-span {
+  margin: 10px;
+}
+
+.form-span label {
+  display: inline-block;
+  width: 150px;
+}
+
+.form-submit-btn {
+  text-align: center;
+  width: 150px;
+  position: absolute;
+  padding: 5px 10px;
+  text-transform: uppercase;
 }

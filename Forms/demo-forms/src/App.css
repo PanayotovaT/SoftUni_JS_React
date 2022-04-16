@@ -22,4 +22,16 @@ span {
   position: absolute;
   padding: 5px 10px;
   text-transform: uppercase;
+  display: inline-block;
+  top: 100px;
 }
+.is-admin-span:nth-child(2) {
+  position: absolute;
+  left: 588px;
+}
+
+.is-admin {
+  position: absolute;
+  left: 482px;
+}
+

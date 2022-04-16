@@ -19,11 +19,13 @@ span {
 .form-submit-btn {
   text-align: center;
   width: 150px;
-  position: absolute;
   padding: 5px 10px;
   text-transform: uppercase;
   display: inline-block;
-  top: 100px;
+  position: relative;
+  left: 75px;
+  top: 10px;
+  
 }
 .is-admin-span:nth-child(2) {
   position: absolute;

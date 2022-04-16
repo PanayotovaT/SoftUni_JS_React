@@ -1,6 +1,10 @@
+import { useState, useEffect } from 'react';
+
 import './App.css';
 
 function App() {
+  const [isValid, setIsValid] = useState(false);
+
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(e.currentTarget);
@@ -13,12 +17,22 @@ function App() {
     console.log(password);
   }
 
+  const onChange = (e) => {
+    console.log(e.target.value);
+    if(e.target.value.length < 3) {
+      console.error('Too short');
+      setIsValid(false)
+    } else {
+      setIsValid(true);
+    }
+  }
   return (
     <div className="App">
       <form method="POST" onSubmit={submitHandler}>
         <span className="form-span">
           <label htmlFor="username">Username</label>
-          <input type="text" name="username" id="username" defaultValue="Alex" />
+          <input type="text" name="username" id="username" defaultValue="Alex" onChange={onChange} autoComplete="off" />
+          {!isValid && <span style={{color:'red'}}>This input is invalid.</span>}
         </span>
         <span className="form-span">
           <label htmlFor="password">Password</label>

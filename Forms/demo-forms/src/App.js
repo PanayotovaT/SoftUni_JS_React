@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import './App.css';
 
 function App() {
   const [username, setUsername] = useState('Alex');
-  const [password, setPassword] = useState('');
   const [services, setServices] = useState([]);
   const [isValid, setIsValid] = useState(false);
+  const passwordRef = useRef();
 
   useEffect(() => {
       fetch('http://localhost:3030/jsonstore/services')
@@ -25,6 +25,9 @@ function App() {
 
     console.log(username);
     console.log(password);
+
+    e.currentTarget.username == '';
+    e.currentTarget.password = '';
   }
 
   const onChange = (e) => {
@@ -38,13 +41,12 @@ function App() {
     }
   }
 
-  const onPasswordChange = (e) =>{
-      setPassword(e.target.value);
-  }
+
 
   const onServiceChange = (e) => {
     setUsername('');
-    setPassword('');
+    console.log(passwordRef.current.value);
+    passwordRef.current.value ='';
   }
 
   return (
@@ -74,7 +76,7 @@ function App() {
         </span>
         <span className="form-span">
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="assword" value={password} onChange={onPasswordChange} />
+          <input type="password" name="password" id="password" ref={passwordRef} />
         </span>
         <span className="form-span span-label-services" >
           <label htmlFor="services" className="span-label">Services</label>

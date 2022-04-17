@@ -27,6 +27,11 @@ span {
   top: 10px;
   
 }
+
+.is-admin-span{
+  margin-top: 10px;
+}
+
 .is-admin-span:nth-child(2) {
   position: absolute;
   left: 588px;
@@ -37,3 +42,14 @@ span {
   left: 482px;
 }
 
+.span-label {
+  position: relative;
+  left: -6px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+
+.span-label-services:nth-child(2) {
+  width:150px;
+}

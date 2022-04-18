@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import HobbyList from './components/HobbyList';
 
 import './App.css';
 
@@ -26,8 +27,6 @@ function App() {
     console.log(username);
     console.log(password);
 
-    e.currentTarget.username == '';
-    e.currentTarget.password = '';
   }
 
   const onChange = (e) => {
@@ -91,7 +90,7 @@ function App() {
         <input type="submit" className="form-submit-btn" value="Submit" />
 
       </form>
-
+      < HobbyList title="My favourity hobby" />
     </div>
   );
 }

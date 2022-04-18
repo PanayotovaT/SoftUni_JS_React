@@ -1,0 +1,15 @@
+
+li {
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    list-style: none;
+    
+}
+
+.selected-hobby {
+    color: rgb(189, 9, 9);
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: rgb(235, 235, 235);
+}

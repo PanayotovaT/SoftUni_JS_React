@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
+
 import * as petService from '../../services/petService';
 import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
     const navigate = useNavigate();
+    const [types, setTypes] = useState([]);
+
+    useEffect(() => {
+        fetch('https://softuni-custom-server-test.herokuapp.com/jsonstore/types')
+            .then(res => res.json())
+                .then(result => {
+                    setTypes(Object.values(result));
+                })
+    }, []);
 
     const onPetCreate = (e) => {
         e.preventDefault();
@@ -44,15 +55,27 @@ const Create = () => {
                             <input type="text" name="imageUrl" id="image" placeholder="Image" />
                         </span>
                     </p>
+
+                    <p className="field">
+                        <label htmlFor="category">Category</label>
+                        <span className="input">
+                            <select id="category" name="category">
+                                {types.reduce((a, x) => {
+                                    if(!a.includes(x.category)) {
+                                        a.push(x.category)
+                                    }
+
+                                    return a;
+                                }, []).map(x => <option key={x} value={x}>{x}</option>)}
+                            </select>
+                        </span>
+                    </p>
+
                     <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
                             <select id="type" name="type">
-                                <option /**value="cat"**/>Cat</option>
-                                <option /**value="dog"**/>Dog</option>
-                                <option /**value="parrot"**/>Parrot</option>
-                                <option /**value="reptile"**/>Reptile</option>
-                                <option /**value="other"**/>Other</option>
+                                {types.map(x => <option key={x._id} value={x.name}>{x.name}</option>)}
                             </select>
                         </span>
                     </p>

@@ -1,6 +1,7 @@
 import  { useState, useEffect } from 'react';
 
 import './App.css';
+import Counter from './Counter';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
     'hobbies': ['first', 'second']
   })
 
+  //ComponentDidMount
   useEffect(()=> {
+    console.log('effect')
     setTimeout(() => {
       setName('Alex');
       setInfo(oldState => ({
@@ -23,11 +26,16 @@ function App() {
         age: 4
       }))
     },1500)
-  }, [])
+  }, [count])
+  //when there are dependencies in the array: ComponentDidUpdate 
+  //useEffect is executed every time the dependency updates
   return (
     <div className="App">
         <h2>{!name ? 'Loading...': name}</h2>
-        <p>{count}</p>
+        {count < 10 
+        ? <Counter value={count} / >
+        : null
+      }
         <button onClick={() => setCount(x => x + 1)}>Count</button>
     </div>
   );

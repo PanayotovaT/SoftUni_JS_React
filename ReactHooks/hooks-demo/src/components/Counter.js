@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import AuthContext from '../contexts/AuthContext';
 
 const Counter =({
-    value
+    // value
 }) => {
+    const {count: value} = useContext(AuthContext);
     useEffect(() => {
         console.log(value);
 

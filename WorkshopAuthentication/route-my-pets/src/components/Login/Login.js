@@ -11,12 +11,25 @@ const Login = ({
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
-        console.log(formData.get('email'));
         let email = formData.get('email');
-        authService.login(email);
+        let password = formData.get('password');
 
-        onLoginHandler(email);
-        navigate('/')
+        authService.login(email, password)
+            .then(authData => {
+                console.log(authData);
+                console.log('logged');
+                
+                onLoginHandler(email);
+        
+                navigate('/')
+            })
+            .catch(err => {
+                //TODO Show notification
+                console.log(err);
+
+                return err;
+            })
+
 
     }
 

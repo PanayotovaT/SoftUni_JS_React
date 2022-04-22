@@ -1,5 +1,7 @@
+const baseUrl = 'http://localhost:3030/users';
+
 export const login = async (email, password) => {
-    let response = await fetch('http://localhost:3030/users/login', {
+    let response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -27,5 +29,5 @@ export const isAuthenticated = () => {
 };
 
 export const logout = () => {
-    localStorage.removeItem('username')
+    fetch(`${baseUrl}/logout`)
 }

@@ -1,8 +1,8 @@
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import * as authService from './services/authService';
+import { AuthContext } from './contexts/AuthContext';
 import Create from './components/Create/Create';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
@@ -14,41 +14,32 @@ import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
 
 function App() {
-  const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '' });
+  const [user, setUser] = useState({
+    _id: '',
+    email: '',
+    accessToken: ''
+  });
 
-  useEffect(() => {
-    let username = authService.getUser();
-
-    setUserInfo({
-      isAuthenticated: Boolean(username),
-      username
-    })
-  }, []);
-
-  const onLogin = (username) => {
-    setUserInfo({
-      isAuthenticated: true,
-      username
-    })
+  const login = (authData) => {
+    setUser(authData);
   }
 
   const onLogout = () => {
-    setUserInfo({
-      isAuthenticated: false,
-      username: null,
-    })
+ 
 
   }
   return (
+    <AuthContext.Provider value={{user, login}}>
+
     <div id="container">
-      <Header {...userInfo} />
+      <Header />
 
       <main id="site-content">
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home/*" element={<Home />} />
           <Route path="/my-pets" element={<MyPets />} />
-          <Route path="/login" element={<Login onLoginHandler={onLogin} />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/create-pet" element={<Create />} />
           <Route path="/edit-pet/:petId" element={<Edit />} />
@@ -62,6 +53,7 @@ function App() {
       </footer>
 
     </div>
+    </AuthContext.Provider>
   );
 }
 

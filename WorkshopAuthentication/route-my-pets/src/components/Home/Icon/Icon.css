@@ -1,0 +1,8 @@
+svg {
+    width: 150px;
+    height: auto;
+}
+
+:hover#svg:nth-child(4) > g:nth-child(2) > g:nth-child(1) > g:nth-child(1) > path:nth-child(49) {
+ fill:gold;   
+}

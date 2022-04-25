@@ -1,3 +1,4 @@
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from "react-router-dom";
 import * as petService from '../../services/petService';
@@ -5,6 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 const Details = () => {
 
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [pet, setPet] = useState({});
     let { petId } = useParams();
@@ -15,10 +17,22 @@ const Details = () => {
             })
     }, []);
 
+    const deleteHandler = (e) => {
+        e.preventDefault();
+        petService.deleteItem(petId, user.accessToken)
+            .then(res => {
+                navigate('/');
+            });
+    }
+
+    const editHandler = () => {
+
+    }
+
     const ownerButtons = (
         <>
             <Link className="button" to={`/edit/${pet._id}`}>Edit</Link>
-            <Link className="button" to={`/delete/${pet._id}`}>Delete</Link>
+            <Link className="button" to={`/delete/${pet._id}`} onClick={deleteHandler}>Delete</Link>
         </>
     );
     const publicButtons = (

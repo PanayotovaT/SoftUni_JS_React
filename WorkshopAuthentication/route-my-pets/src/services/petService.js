@@ -31,3 +31,13 @@ export const create = async (pet, token) => {
     const result = await response.json();
     return result;
 }
+
+export const deleteItem = (petId, token) => {
+    return fetch(`${baseUrl}/pets/${petId}`, {
+        method:'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        }
+    }).then(res => res.json());
+}

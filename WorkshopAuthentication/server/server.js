@@ -1333,38 +1333,7 @@
     };
     var seedData = {
 		pets:{
-		'b559bd24-5fb6-4a42-bc48-40c17dea649d': {
-			'_ownerId': '35c62d76-8152-4626-8712-eeb96381bea8',
-			'name': 'Tom',
-			'description': 'Cats have been domesticated (tamed) for nearly 10,000 years.[6]\r\nThey are one of the most popular pets in the world. They are kept by humans for hunting rodents and as companions.\r\nThere are also farm cats, which are kept on farms to keep rodents away; and feral cats, which are domestic cats that live away from humans.',
-			'imageUrl': '/images/cat1.png',
-			'type': 'cat',
-			'_createdOn': 1617797078108
-		},
-		'2949b54d-b163-4a00-b65c-41fb8b641561': {
-			'_ownerId': '35c62d76-8152-4626-8712-eeb96381bea8',
-			'name': 'Milo',
-			'description': 'Today, some dogs are used as pets, others are used to help humans do their work. They are a popular pet because they are usually playful, friendly, loyal and listen to humans. Thirty million dogs in the United States are registered as pets.[5] Dogs eat both meat and vegetables, often mixed together and sold in stores as dog food. Dogs often have jobs, including as police dogs, army dogs, assistance dogs, fire dogs, messenger dogs, hunting dogs, herding dogs, or rescue dogs.',
-			'imageUrl': '/images/dog.png',
-			'type': 'dog',
-			'_createdOn': 1617799443179
-		},
-		'f6f54fcd-0469-470b-8ffa-a33ae6c7a524': {
-			'_ownerId': '847ec027-f659-4086-8032-5173e2f9c93a',
-			'name': 'Tyson',
-			'description': 'Species of parrots that are kept as companions include large parrots, such as amazons, greys, cockatoos, eclectus, hawk-headed parrots, and macaws; (Species include hybrids like the Catalina macaw) mid-sized birds, such as caiques, conures, quakers, Pionus, Poicephalus, rose-ringed parakeets, and rosellas; and many of the smaller types, including Brotogeris, budgies, cockatiels, parakeets, lovebirds, parrotlets and lineolated parakeets.',
-			'imageUrl': '/images/parrot.png',
-			'type': 'parrot',
-			'_createdOn': 1617799658349
-		},
-		'0e68a98c-3d56-4d3d-9d9f-256ae02a41b9': {
-			'_ownerId': '847ec027-f659-4086-8032-5173e2f9c93a',
-			'name': 'Buddy',
-			'description': 'Dogs are sometimes referred to as "man\'s best friend" because they are kept as domestic pets and are usually loyal and like being around humans. Dogs like to be petted, but only when they can first see the petter\'s hand before petting; one should never pet a dog from behind.',
-			'imageUrl': '/images/dog2.png',
-			'type': 'dog',
-			'_createdOn': 1617799822338
-		}
+		
 	},
 	likes: {}
     };

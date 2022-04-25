@@ -1,33 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 
+import { AuthContext } from '../../contexts/AuthContext';
 import * as petService from '../../services/petService';
 import { useNavigate } from 'react-router-dom';
 
 const Create = () => {
     const navigate = useNavigate();
-    const [types, setTypes] = useState([]);
-    const [categories, setCategories] = useState([]);
-
-    useEffect(() => {
-        fetch('https://softuni-custom-server-test.herokuapp.com/jsonstore/types')
-            .then(res => res.json())
-            .then(result => {
-                const typesResult = Object.values(result);
-
-                const ctaegoryResult = typesResult.reduce((a, x) => {
-
-                    if (!a[x.category]) {
-                        a[x.category] = []
-                    }
-                    a[x.category].push(x);
-
-                    return a;
-                }, {});
-                setTypes(typesResult);
-                setCategories(ctaegoryResult);
-
-            })
-    }, []);
+    const { user } = useContext(AuthContext);
 
     const onPetCreate = (e) => {
         e.preventDefault();
@@ -38,15 +18,12 @@ const Create = () => {
         let imageUrl = formData.get('imageUrl').trim();
         let description = formData.get('description').trim();
 
-        petService.create({ name, type, imageUrl, description })
+        petService.create({ name, type, imageUrl, description }, user.accessToken)
             .then(result => {
                 navigate('/home')
             });
     }
 
-    const onCategoryChange = (e) => {
-        setTypes(categories[e.target.value]);
-    }
 
     return (
         <section id="create-page" className="create">
@@ -73,19 +50,13 @@ const Create = () => {
                     </p>
 
                     <p className="field">
-                        <label htmlFor="category">Category</label>
-                        <span className="input">
-                            <select id="category" name="category" onChange={onCategoryChange}>
-                                {Object.keys(categories).map(x => <option key={x} value={x} >{x}</option>)}
-                            </select>
-                        </span>
-                    </p>
-
-                    <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
                             <select id="type" name="type">
-                                {types.map(x => <option key={x._id} value={x.name}>{x.name}</option>)}
+                                <option value="dog">Dog</option>
+                                <option value="cat">Cat</option>
+                                <option value="horse">Horse</option>
+                                <option value="parrot">Parrot</option>
                             </select>
                         </span>
                     </p>

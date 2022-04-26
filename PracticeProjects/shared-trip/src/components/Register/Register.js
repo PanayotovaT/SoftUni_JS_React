@@ -2,12 +2,23 @@ import { Link } from 'react-router-dom';
 
 const Register = () => {
 
+    const registerHandler = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        const email =  formData.get('email').trim();
+        const password =  formData.get('password').trim();
+        const repass =  formData.get('repass').trim();
+        
+
+    }
+
     return (
         <section className="py-5" id="register-page">
         <div className="container register-page">
             <h1>Register</h1>
             <div className="register">
-                <form  method="POST">
+                <form  method="POST" onSubmit={registerHandler}>
                     <div className="form-group">
                         <label htmlFor="email">Email address</label>
                         <input type="text" className="form-control" id="email" placeholder="Enter email" name="email"

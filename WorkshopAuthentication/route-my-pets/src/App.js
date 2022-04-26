@@ -50,7 +50,7 @@ function App() {
           <Route path="/create-pet" element={<Create />} />
           <Route path="/edit-pet/:petId" element={<Edit />} />
           <Route path="/details/:petId" element={<Details />} />
-          <Route path="/logout" element={<Logout onLogout={onLogout}/>} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </main>
 

@@ -1,6 +1,5 @@
 import './App.css';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 
 import useLocalStorage from './hooks/useLocalStorage';
 import { AuthContext } from './contexts/AuthContext';

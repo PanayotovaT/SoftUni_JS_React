@@ -39,3 +39,13 @@ export const register = async (email, password, gender) => {
         throw result;
     }
 }
+
+export const logout = (token) => {
+    return fetch(`${baseURl}/logout`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        }
+    })
+}

@@ -13,6 +13,7 @@ import Profile from './components/Profile/Profile';
 import Edit from './components/Edit/Edit';
 import NotFound from './components/NotFound/NotFound';
 import { AuthContext } from './contexts/AuthContext';
+import Logout from './components/Logout/Logout';
 
 
 function App() {
@@ -27,9 +28,14 @@ function App() {
   const login = (authData) => {
     setUser(authData)
   }
+
+  const logout = () => {
+    setUser(initialUserInfo);
+  }
+
   return (
 
-    <AuthContext.Provider value={{user, login}}>
+    <AuthContext.Provider value={{user, login, logout}}>
 
       <div className="App">
         <Header />
@@ -38,6 +44,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/create" element={<Create />} />
             <Route path="/shared-trips" element={< SharedTrips />} />
             <Route path="/profile" element={< Profile />} />

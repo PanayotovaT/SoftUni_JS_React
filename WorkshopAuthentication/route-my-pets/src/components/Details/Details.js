@@ -12,10 +12,10 @@ const Details = () => {
     let { petId } = useParams();
     useEffect(() => {
         petService.getOne(petId)
-            .then(result => { console.log(result);
+            .then(result => { 
                 setPet(result);
             })
-    }, []);
+    }, [petId]);
 
     const deleteHandler = (e) => {
         e.preventDefault();

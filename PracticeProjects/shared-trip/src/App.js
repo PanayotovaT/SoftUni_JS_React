@@ -2,6 +2,7 @@ import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import {useState} from 'react';
 
+import useLocalStorage from './hooks/useLocalStorage';
 import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
@@ -23,7 +24,7 @@ function App() {
     accessToken: ''
   }
 
-  const [user, setUser] = useState(initialUserInfo);
+  const [user, setUser] = useLocalStorage('user',initialUserInfo);
 
   const login = (authData) => {
     setUser(authData)

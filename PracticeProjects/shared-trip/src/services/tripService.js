@@ -36,3 +36,24 @@ export const deleteItem = async (id, token) => {
     const result = await response;
     return result;
 }
+
+export const update = async (id, trip, token) => {
+    const response  =  await fetch(`${baseUrl}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(trip)
+    });
+
+    const result = await response.json();
+
+    return result;
+}
+
+export const getMyTrips = async (userId) => {
+    const response = await fetch(`${baseUrl}`);
+    const result = (await response.json()).filter(x => x._ownerId === userId);
+    return result;
+}

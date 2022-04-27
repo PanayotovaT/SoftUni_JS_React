@@ -11,7 +11,6 @@ const Details = () => {
     const { user } = useContext(AuthContext);
     const [trip, setTrip] = useState({});
     const id = useParams().carId;
-    console.log(id);
 
     useEffect(() => {
         tripService.getOne(id)
@@ -60,9 +59,12 @@ const Details = () => {
                     <i className="fas fa-users buddies"></i>
                     <h5>Shared trip Buddies</h5>
                     <div>
-                        <p>peter@abv.bg, marry@abv.bg</p>
+                        {trip.buddies?.length > 0
+                            ? <p>{trip.buddies.join(', ')}</p>
+                            : <p>there are no buddies yet...</p>
+                        }
 
-                        <p>there are no buddies yet...</p>
+
                     </div>
                     <h5>Driver: <span>{user.email}</span> </h5>
                 </div>

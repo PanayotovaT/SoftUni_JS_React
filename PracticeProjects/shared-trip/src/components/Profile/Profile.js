@@ -1,24 +1,36 @@
+import { useEffect, useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
+import * as tripService from '../../services/tripService';
+import TripInfo from './TripInfo/TripInfo';
+
 
 const Profile = () => {
+    const [trips, setTrips] = useState([]);
+    const { user } = useContext(AuthContext);
+
+    useEffect(()=> {
+        tripService.getMyTrips(user._id)
+            .then(myTrips => {
+                setTrips(myTrips);
+            })
+    }, []);
 
     return (
         <section className="profile col-md-6 text-center col-lg" id="profile-page">
         <div className="profile-container">
-            <img className="profile-img" src="../static/images/male.png" />
-            <p>Email: <span>mihail_valkov@mail.bg</span></p>
+            <img className="profile-img" src={`/images/${user.gender}.png`} />
+            <p>Email: <span>{user.email}</span></p>
         </div>
         <div className="profile-info">
-            <p>Trips History: <span>3</span> counts</p>
+            <p>Trips History: <span>{trips.length}</span> counts</p>
 
             <div className="trips-info">
-                <p>from <span>Svilengrad</span> to <span>Sofia</span> on <span>2021-06-16</span> at
-                    <span>20:40</span></p>
-                <p>from <span>Plovdiv</span> to <span>Burgas</span> on <span>2021-07-07</span> at <span>10:40</span>
-                </p>
-                <p>from <span>Sofia</span> to <span>Nesebur</span> on <span>2021-08-01</span> at <span>09:00</span>
-                </p>
-
-                <p>there are no offer trips yet...</p>
+             
+             {trips.length > 0
+                ?   trips.map(x => <TripInfo key={x._id} trip={x} />)
+                :  <p>there are no offer trips yet...</p>
+             }
+               
             </div>
 
         </div>

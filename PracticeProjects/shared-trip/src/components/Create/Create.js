@@ -1,11 +1,54 @@
-const Create = () => {
+import  { useContext } from 'react';
+import  { useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '../../contexts/AuthContext';
+import * as tripService from '../../services/tripService';
+
+const Create = () => {
+    const navigate = useNavigate();
+const { user } = useContext(AuthContext);
+
+    const createHandler = (e) => {
+        e.preventDefault();
+
+        const formData =  new FormData(e.currentTarget);
+
+        const startPoint = formData.get('startPoint').trim();
+        const endPoint = formData.get('endPoint').trim();
+        const date = formData.get('date').trim();
+        const time = formData.get('time').trim();
+        const imageUrl = formData.get('imageUrl').trim();
+        const brand = formData.get('brand').trim();
+        const seats = Number(formData.get('seats').trim());
+        const price = Number(formData.get('price').trim());
+        const description = formData.get('description').trim();
+
+        const trip = {
+            startPoint,
+            endPoint,
+            date,
+            time,
+            imageUrl,
+            brand,
+            seats,
+            price,
+            description,
+            buddies: [],
+
+        }
+
+     tripService.create(trip, user.accessToken)
+        .then(result => {
+            navigate('/shared-trips');
+        })
+
+    }
     return (
         <section className="py-5" id="offer-trip-page">
             <div className="container offer-trip">
                 <h1>Offer trip</h1>
                 <div>
-                    <form action="" method="">
+                    <form  method="POST" onSubmit={createHandler}>
                         <div className="offer-label">
                             <label htmlFor="startPoint"> <i className="fas fa-map-marker-alt"></i> Starting Point </label>
                             <label htmlFor="endPoint"> <i className="fas fa-map-marker-alt"></i> End Point</label>
@@ -46,7 +89,7 @@ const Create = () => {
                         <div className="form-group">
                             <label htmlFor="description">Description</label>
                             <textarea className="form-control" id="description" placeholder="Information about the trip"
-                                name="descritpion"></textarea>
+                                name="description"></textarea>
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </form>

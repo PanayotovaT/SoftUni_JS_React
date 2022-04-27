@@ -21,7 +21,7 @@ const Details = () => {
         e.preventDefault();
         petService.deleteItem(petId, user.accessToken)
             .then(res => {
-                navigate('/');
+                navigate('/shared-trips');
             });
     }
 

@@ -24,3 +24,15 @@ export const create = async (trip, token) => {
     const result = await response.json();
     return result;
 }
+
+export const deleteItem = async (id, token) => {
+    const response = await fetch(`${baseUrl}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        }
+    });
+    const result = await response;
+    return result;
+}

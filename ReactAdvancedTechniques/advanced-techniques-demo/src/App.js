@@ -1,10 +1,14 @@
 import './App.css';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    <div className="App">
-     
-    </div>
+    <AuthProvider>
+      <div className="App">
+        
+      </div>
+    </AuthProvider>
+
   );
 }
 

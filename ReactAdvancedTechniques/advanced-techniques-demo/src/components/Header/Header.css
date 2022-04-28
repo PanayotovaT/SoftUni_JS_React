@@ -1,0 +1,10 @@
+.welcome-email {
+    padding: 10px 5px;
+    font-style: italic;
+    color:rgb(143, 27, 27);
+}
+.brand {
+    color:rgb(143, 27, 27) !important;
+    font-style: italic;
+
+}

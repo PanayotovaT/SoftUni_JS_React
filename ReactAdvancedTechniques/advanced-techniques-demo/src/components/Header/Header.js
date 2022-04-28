@@ -1,12 +1,17 @@
 import { Nav, Navbar, Container, NavDropdown, Button, Form, FormControl } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+
+import './Header.css';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
+    const { user } = useContext(AuthContext);
 
     return (
         <Navbar bg="light" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="#">Alexios</Navbar.Brand>
+          <Navbar.Brand href="#" className="brand" >Alexios</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -32,6 +37,7 @@ const Header = () => {
                 Link
               </Nav.Link> */}
             </Nav>
+            <h6 className="welcome-email">Hello, {user.email}!</h6>
             <Form className="d-flex">
               <FormControl
                 type="search"

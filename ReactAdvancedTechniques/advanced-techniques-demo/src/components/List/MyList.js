@@ -1,11 +1,14 @@
-import { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './MyList.css';
+import { useAuth } from '../../contexts/AuthContext';
+
 
 
 const MyList = () => {
+    const navigate = useNavigate();
     const [dogs, setDogs] = useState([]);
     const { user } = useAuth();
 
@@ -19,6 +22,10 @@ const MyList = () => {
             })
 
     }, []);
+
+    if(!user.email) {
+        return navigate('/login');
+    }
 
     return (
         <Carousel className="carousel-img">

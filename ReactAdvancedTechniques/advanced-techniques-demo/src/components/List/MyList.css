@@ -1,0 +1,20 @@
+.carousel-img {
+    width: 500px;
+    height: auto;
+    overflow: hidden;
+    margin:0 auto;
+
+}
+
+.carousel-img-item {
+    width: 500px;
+    height: auto;
+    overflow: hidden;
+}
+
+img {
+    width: auto;
+    height: 300px;
+    object-fit: cover;
+
+}

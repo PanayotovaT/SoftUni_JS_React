@@ -21,7 +21,7 @@ const Header = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#action2">Dashboard</Nav.Link>
             <NavDropdown title="Collection" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">First Collection</NavDropdown.Item>
+              <NavDropdown.Item to="/my-list" as={Link} >Dog Gallery</NavDropdown.Item>
               <NavDropdown.Item href="#action4">Second Collection</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action5">

@@ -17,8 +17,10 @@ export const AuthProvider = ({
         })
     }
 
+    const isAuthenticated = Boolean(user.email);
+
     return (
-        <AuthContext.Provider value={{user, login}}>
+        <AuthContext.Provider value={{user, login, isAuthenticated}}>
             {children}
         </AuthContext.Provider>
     )

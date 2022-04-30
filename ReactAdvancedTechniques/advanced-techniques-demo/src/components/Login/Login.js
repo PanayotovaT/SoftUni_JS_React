@@ -1,6 +1,6 @@
 import { Form, Button } from 'react-bootstrap';
 import { useContext } from 'react';
-import { useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import './Login.css';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -9,13 +9,16 @@ const Login = () => {
     const { login } = useContext(AuthContext);
     const navigate = useNavigate();
 
+
+    //  throw new Error('Cannot Login');
+
+
     const loginSubmitHandler = (e) => {
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget);
 
-        const { email, password} = Object.fromEntries(formData);
-        console.log(email);
+        const { email, password } = Object.fromEntries(formData);
 
         login(email);
         navigate('/');

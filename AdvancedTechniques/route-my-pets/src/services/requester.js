@@ -7,7 +7,7 @@ export const request = (url) => {
 async function responseHandler(res) {
     let jsonData = await res.json()
     if(res.ok) {
-        return Object.values(jsonData);
+        return jsonData;
     } else {
         throw jsonData;
     }

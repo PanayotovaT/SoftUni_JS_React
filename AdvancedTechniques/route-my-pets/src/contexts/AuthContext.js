@@ -15,11 +15,7 @@ export const AuthProvider = ({ children }) => {
     const login = (authData) => {
         setUser(authData);
       }
-    
-    //   const register = (authData) => {
-    //     setUser(authData);
-    //   }
-    
+
       const logout = () => {
         setUser(initialAuthState);
       }

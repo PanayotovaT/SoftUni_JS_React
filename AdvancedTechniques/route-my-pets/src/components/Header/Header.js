@@ -1,11 +1,10 @@
 import './Header.css';
 import { Link, NavLink } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
 
-    const {user} = useContext(AuthContext);
+    const {user} = useAuthContext();
     const isActive = ({ isActive }) => "nav-link" + (isActive ? " isActive" : "")
 
     let guestNavigation = (

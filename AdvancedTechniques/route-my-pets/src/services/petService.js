@@ -5,15 +5,13 @@ const baseUrl = 'http://localhost:3030/data'
 export const getAll = async () => {
 
     let pets = await request(`${baseUrl}/pets`);
-    return pets;
+    return Object.values(pets);
 
 };
 
 export const getOne = async (petId) => {
 
-    let res = await fetch(`${baseUrl}/pets/${petId}`);
-    const pet = res.json();
-    console.log(pet);
+    let pet = await request(`${baseUrl}/pets/${petId}`);
     return pet;
 }
 

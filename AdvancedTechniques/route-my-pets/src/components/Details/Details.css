@@ -1,0 +1,13 @@
+.modal {
+    position: absolute;
+}
+
+div.actions a {
+    margin-right: 10px;
+    height: 40px;
+}
+
+img.hearts {
+
+    margin-right: 10px;
+}

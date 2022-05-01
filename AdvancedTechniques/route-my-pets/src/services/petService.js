@@ -1,20 +1,17 @@
+import { request } from './requester';
 // const baseUrl = 'https://softuni-custom-server-test.herokuapp.com/jsonstore'
 const baseUrl = 'http://localhost:3030/data'
 
 export const getAll = async () => {
 
-    let response = await fetch(`${baseUrl}/pets`);
-    let result = await response.json();
-    let pets = Object.values(result);
+    let pets = await request(`${baseUrl}/pets`);
     return pets;
 
 };
 
 export const getOne = async (petId) => {
 
-    let response = await fetch(`${baseUrl}/pets/${petId}`);
-    let pet = await response.json();
-
+    let pet = await request(`${baseUrl}/pets/${petId}`);
     return pet;
 }
 

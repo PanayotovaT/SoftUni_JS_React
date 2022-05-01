@@ -13,6 +13,8 @@ const CategoryPetList = ({
             .then(result => {
                 setPets(result);
             }).catch(err => {
+                console.log('err');
+                console.error(err.message);
                 return;
             })
     }, []);

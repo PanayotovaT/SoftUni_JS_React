@@ -11,7 +11,9 @@ export const getAll = async () => {
 
 export const getOne = async (petId) => {
 
-    let pet = await request(`${baseUrl}/pets/${petId}`);
+    let res = await fetch(`${baseUrl}/pets/${petId}`);
+    const pet = res.json();
+    console.log(pet);
     return pet;
 }
 

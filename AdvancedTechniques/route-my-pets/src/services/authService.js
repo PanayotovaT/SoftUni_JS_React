@@ -48,7 +48,7 @@ export const isAuthenticated = () => {
     return Boolean(getUser());
 };
 
-export const logout = (token) => {
+export const logout = async (token) => {
     return fetch(`${baseUrl}/logout`, {
         method: 'GET',
         headers: {

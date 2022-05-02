@@ -12,6 +12,7 @@ import Login from './components/Login/Login';
 import MyPets from './components/MyPets/MyPets';
 import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
+import ErrorBoundary from './Common/ErrorBoundary';
 
 function App() {
 
@@ -19,31 +20,34 @@ function App() {
 
 
   return (
-    <AuthProvider>
+    <ErrorBoundary>
 
-      <div id="container">
-        <Header />
+      <AuthProvider>
 
-        <main id="site-content">
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home/*" element={<Home />} />
-            <Route path="/my-pets" element={<MyPets />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/create-pet" element={<Create />} />
-            <Route path="/edit-pet/:petId" element={<Edit />} />
-            <Route path="/details/:petId" element={<Details />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
-        </main>
+        <div id="container">
+          <Header />
 
-        <footer id="site-footer">
-          <p>@PetMyPet</p>
-        </footer>
+          <main id="site-content">
+            <Routes>
+              <Route path="/" element={<Navigate to="/home" />} />
+              <Route path="/home/*" element={<Home />} />
+              <Route path="/my-pets" element={<MyPets />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/create-pet" element={<Create />} />
+              <Route path="/edit-pet/:petId" element={<Edit />} />
+              <Route path="/details/:petId" element={<Details />} />
+              <Route path="/logout" element={<Logout />} />
+            </Routes>
+          </main>
 
-      </div>
-    </AuthProvider>
+          <footer id="site-footer">
+            <p>@PetMyPet</p>
+          </footer>
+
+        </div>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 

@@ -4,7 +4,8 @@ import CategoryPetList from '../PetList/CategoryPetList';
 import PetList from '../PetList/PetList';
 
 const Home = () => {
-
+    console.log(process.env.NODE_ENV);
+    throw new Error('Error....');
     return (
         <section id="dashboard-page" className="dashboard">
             <h1>Dashboard</h1>

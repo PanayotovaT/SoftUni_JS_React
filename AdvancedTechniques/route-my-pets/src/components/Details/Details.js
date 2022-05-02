@@ -27,6 +27,9 @@ const Details = () => {
         petService.deleteItem(petId, user.accessToken)
             .then(res => {
                 navigate('/home');
+            })
+            .finally(() => {
+                setShowDeleteDialog(false);
             });
     }
 
@@ -51,7 +54,7 @@ const Details = () => {
     return (
         <>
 
-            <ConfirmDialog className="modal" show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler}/>
+            <ConfirmDialog className="modal" show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
             <section id="details-page" className="details">
                 <div className="pet-information">
                     <h3>Name: {pet.name}</h3>

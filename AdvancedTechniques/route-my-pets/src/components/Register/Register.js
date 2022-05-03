@@ -21,7 +21,7 @@ const Register = () => {
             return;
         }
 
-        if(password == '') {
+        if(password === '') {
             console.error('Password field is required!');
             return;
         }

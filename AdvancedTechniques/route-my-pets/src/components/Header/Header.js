@@ -1,5 +1,5 @@
 import './Header.css';
-import { Link, NavLink } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
@@ -9,16 +9,16 @@ const Header = () => {
 
     let guestNavigation = (
         <div id="guest">
-            <NavLink className={isActive, "button"} to="/login">Login</NavLink>
-            <NavLink className={isActive, "button"} to="/register">Register</NavLink>
+            <NavLink className={isActive + " button"} to="/login">Login</NavLink>
+            <NavLink className={isActive + " button"} to="/register">Register</NavLink>
         </div>
     );
 
     let userNavigation = (
         <div id="user">
             <span>Welcome, {user.email}</span>
-            <NavLink className={isActive, "button"} to="/my-pets">My Pets</NavLink>
-            <NavLink className={isActive, "button"} to="/create-pet">Add Pet</NavLink>
+            <NavLink className={isActive +" button"} to="/my-pets">My Pets</NavLink>
+            <NavLink className={isActive + " button"} to="/create-pet">Add Pet</NavLink>
             <NavLink className="button" to="/logout">Logout</NavLink>
         </div>
     );

@@ -1,6 +1,5 @@
-import { Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link  } from 'react-router-dom';
 
 import './Details.css'
 import * as petService from '../../services/petService';
@@ -37,8 +36,28 @@ const Details = () => {
         e.preventDefault();
         setShowDeleteDialog(true);
     }
-    const editHandler = () => {
+    // const editHandler = () => {
 
+    // }
+
+    const likeButtonClick =(e) => {
+        e.preventDefault();
+
+        if(pet.likes.includes(user._id)) {
+            console.log('User already liked');
+            return;
+        }
+        let likes = [...pet.likes, user._id];
+        let likedPet = {...pet, likes};
+
+        petService.like(petId, likedPet, user.accessToken)
+            .then(pet =>{
+                console.log(pet);
+                setPet(state => ({
+                    ...state,
+                    likes
+                }))
+            })
     }
 
     const ownerButtons = (
@@ -48,7 +67,7 @@ const Details = () => {
         </>
     );
     const publicButtons = (
-        <Link className="button" to={`/like/${pet._id}`}>Like</Link>
+        <Link className="button" to={`/like/${pet._id}`}  onClick={likeButtonClick} >Like</Link>
     );
 
     return (
@@ -61,7 +80,7 @@ const Details = () => {
                     <p className="type">Type: {pet.type}</p>
                     <p className="img"><img src={pet.imageUrl} alt="pet" /></p>
                     <div className="actions">
-                        {user._id && (user._id == pet._ownerId
+                        {user._id && (user._id === pet._ownerId
                             ? ownerButtons
                             : publicButtons
                         )}

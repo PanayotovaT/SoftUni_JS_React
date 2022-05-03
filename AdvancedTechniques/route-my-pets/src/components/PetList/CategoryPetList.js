@@ -23,7 +23,7 @@ const CategoryPetList = ({
             {pets.length > 0
                 ? (
                     <ul className="other-pets-list">
-                        {pets.filter(x => x.type == type).map(x => <PetCard key={x._id} pet={x} />)}
+                        {pets.filter(x => x.type === type).map(x => <PetCard key={x._id} pet={x} />)}
                     </ul>)
                 : <p className="no-pets">No pets in database!</p>
             }

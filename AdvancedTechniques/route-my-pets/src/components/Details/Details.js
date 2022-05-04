@@ -75,7 +75,7 @@ const Details = () => {
                 <div className="pet-information">
                     <h3>Name: {pet.name}</h3>
                     <p className="type">Type: {pet.type}</p>
-                    <p className="img"><img src={pet.imageUrl} alt="pet" /></p>
+                    <p className="img"><img src={pet.imageUrl} alt="pet" className="img-details" /></p>
                     <div className="actions">
                         {user._id && (user._id === pet._ownerId
                             ? ownerButtons

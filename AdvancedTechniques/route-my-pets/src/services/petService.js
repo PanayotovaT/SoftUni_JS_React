@@ -39,6 +39,17 @@ export const deleteItem = (petId, token) => {
     }).then(res => res.json());
 }
 
+export const update = ( petId, pet, token ) => {
+    return fetch(`${baseUrl}/pets/${petId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(pet)
+    }).then(res => res.json());
+}
+
 export const like = (petId, pet, token) => {
     // pet.likes = likes;
     return fetch(`${baseUrl}/pets/${petId}`, {

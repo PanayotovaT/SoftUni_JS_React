@@ -1,9 +1,10 @@
 import { Alert } from 'react-bootstrap';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import './Edit.css';
 import { usePetState } from '../../hooks/usePetState';
+import { useAuthContext } from '../../contexts/AuthContext';
 import * as petService from '../../services/petService';
 
 const types = [
@@ -15,16 +16,23 @@ const types = [
 ];
 
 const Edit = () => {
+    const navigate = useNavigate()
     const { petId } = useParams();
-    const [pet] = usePetState(petId);
+    const { user } =  useAuthContext();
+    const [pet, setPet] = usePetState(petId);
     const [error, setError] = useState({ name: null });
     const [descrError, setDescrError] = useState({ name: null });
-
 
     const updatePetHandler = (e) => {
         e.preventDefault();
         console.log('Submit')
-
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+        
+        petService.update(petId, data, user.accessToken)
+            .then(result => {
+                navigate(`/details/${petId}`);
+            });
 
     }
 
@@ -78,7 +86,7 @@ const Edit = () => {
                     <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
-                            <select id="type" name="type" value={pet.type}>
+                            <select id="type" name="type" value={pet.type} onChange={(e) => setPet(s => ({...s, type: e.target.value})) }>
                                 {types.map(x => <option key={x.value} value={x.value} >{x.text}</option>)}
                             </select>
                         </span>

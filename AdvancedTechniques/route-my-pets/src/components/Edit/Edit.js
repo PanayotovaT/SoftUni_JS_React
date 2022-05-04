@@ -1,16 +1,49 @@
+import { Alert } from 'react-bootstrap';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import './Edit.css';
 import { usePetState } from '../../hooks/usePetState';
 import * as petService from '../../services/petService';
 
+const types = [
+    { value: 'cat', text: 'Cat' },
+    { value: 'dog', text: 'Dog' },
+    { value: 'horse', text: 'Horse' },
+    { value: 'parrot', text: 'Parrot' },
+    { value: 'other', text: 'Other' },
+];
+
 const Edit = () => {
     const { petId } = useParams();
-    const [pet, setPet] = usePetState(petId);
+    const [pet] = usePetState(petId);
+    const [error, setError] = useState({ name: null });
+    const [descrError, setDescrError] = useState({ name: null });
 
 
     const updatePetHandler = (e) => {
         e.preventDefault();
         console.log('Submit')
 
+
+    }
+
+    const nameChangeHandler = (e) => {
+        let currentName = e.target.value;
+        if (currentName.length < 3) {
+            setError({ name: 'Name should be at least 3 characters.' })
+        } else {
+            setError({ name: null })
+        }
+    }
+
+    const descriptionChangeHandler = (e) => {
+        let currentName = e.target.value;
+        if (currentName.length < 10) {
+            setDescrError({ name: 'Description should be at least 10 characters.' })
+        } else {
+            setDescrError({ name: null })
+        }
 
     }
 
@@ -21,32 +54,32 @@ const Edit = () => {
                     <legend>Edit my Pet</legend>
                     <p className="field">
                         <label htmlFor="name">Name</label>
-                        <span className="input">
-                            <input type="text" name="name" id="name" /**value="Milo"**/ />
+                        <span className={'input' + (error.name ? ' input-name-error' : '')} >
+                            <input type="text" name="name" id="name" defaultValue={pet.name} onBlur={nameChangeHandler} />
                         </span>
+                        <span className={error.name ? 'name-error' : 'hidden'}>{error.name}</span>
                     </p>
                     <p className="field">
                         <label htmlFor="description">Description</label>
                         <span className="input">
                             <textarea name="description"
-                                id="description">Today, some dogs are used as pets, others are used to help humans do their work. They are a popular pet because they are usually playful, friendly, loyal and listen to humans. Thirty million dogs in the United States are registered as pets.[5] Dogs eat both meat and vegetables, often mixed together and sold in stores as dog food. Dogs often have jobs, including as police dogs, army dogs, assistance dogs, fire dogs, messenger dogs, hunting dogs, herding dogs, or rescue dogs.</textarea>
+                                id="description" defaultValue={pet.description} onBlur={descriptionChangeHandler} />
                         </span>
+                        <Alert key='danger' variant='danger' show={Boolean(descrError.name)}>
+                            {descrError.name}
+                        </Alert>
                     </p>
                     <p className="field">
                         <label htmlFor="image">Image</label>
                         <span className="input">
-                            <input type="text" name="imageUrl" id="image" /**value="/images/dog.png" **/ />
+                            <input type="text" name="imageUrl" id="image" defaultValue={pet.imageUrl} />
                         </span>
                     </p>
                     <p className="field">
                         <label htmlFor="type">Type</label>
                         <span className="input">
-                            <select id="type" name="type" /**value="dog"**/>
-                                <option /**value="cat"**/  >Cat</option>
-                                <option /**value="dog"**/ selected>Dog</option>
-                                <option /**value="parrot"**/ >Parrot</option>
-                                <option /**value="reptile"**/ >Reptile</option>
-                                <option /**value="other"**/ >Other</option>
+                            <select id="type" name="type" value={pet.type}>
+                                {types.map(x => <option key={x.value} value={x.value} >{x.text}</option>)}
                             </select>
                         </span>
                     </p>

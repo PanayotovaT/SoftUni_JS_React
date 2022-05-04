@@ -1,0 +1,13 @@
+.input-name-error {
+    border: 1px solid  rgb(204, 18, 18) !important;
+}
+
+.name-error {
+    display: inline-block;
+    color: rgb(204, 18, 18);
+    font-style: italic;
+}
+
+.hidden {
+    display: hidden;
+}

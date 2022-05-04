@@ -1,7 +1,22 @@
+import { useParams } from 'react-router-dom';
+import { usePetState } from '../../hooks/usePetState';
+import * as petService from '../../services/petService';
+
 const Edit = () => {
+    const { petId } = useParams();
+    const [pet, setPet] = usePetState(petId);
+
+
+    const updatePetHandler = (e) => {
+        e.preventDefault();
+        console.log('Submit')
+
+
+    }
+
     return (
         <section id="edit-page" className="edit">
-            <form id="edit-form" action="#" method="">
+            <form id="edit-form" method="POST" onSubmit={updatePetHandler} >
                 <fieldset>
                     <legend>Edit my Pet</legend>
                     <p className="field">

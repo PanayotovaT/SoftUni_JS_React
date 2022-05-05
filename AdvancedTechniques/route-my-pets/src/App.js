@@ -18,9 +18,6 @@ import Notification from './Common/Notification';
 
 function App() {
 
-
-
-
   return (
     <ErrorBoundary>
       <NotificationProvider>

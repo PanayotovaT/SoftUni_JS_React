@@ -4,7 +4,7 @@ import { useNotificationContext } from '../contexts/NotificationContext';
 import './Notification.css';
 
 const Notification = () => {
-    const { notification } = useNotificationContext()
+    const { notification, hideNotification } = useNotificationContext()
 
     if(!notification.show) {
         return null
@@ -12,16 +12,16 @@ const Notification = () => {
 
     return (
 
-        <Toast className="d-inline-block m-1 notification" bg={notification.type} >
-            <Toast.Header>
-                <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                <strong className="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-            </Toast.Header>
-            <Toast.Body >
-               {notification.message}
-            </Toast.Body>
-        </Toast>
+        <Toast className="d-inline-block m-1 notification " bg={notification.type} onClose={hideNotification}>
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">My Pets</strong>
+          <small>11 mins ago</small>
+        </Toast.Header>
+        <Toast.Body >
+          {notification.message}
+        </Toast.Body>
+      </Toast>
     )
 }
 

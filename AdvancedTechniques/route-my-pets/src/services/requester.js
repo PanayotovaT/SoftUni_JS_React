@@ -4,7 +4,6 @@ export const request = async (method, url, data) => {
     if (method === 'GET') {
         result = fetch(url);
     } else {
-        let token = '';
         result = fetch(url, {
             method,
             headers: {
@@ -33,7 +32,7 @@ function getToken() {
         let user = JSON.parse(localStorage.getItem('user'));
         console.log(user);
         if (!user) {
-            throw ({ message: 'You must be authenticated!' })
+            throw new Error({ message: 'You must be authenticated!' })
         }
         return user.accessToken;
 

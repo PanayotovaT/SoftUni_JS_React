@@ -9,6 +9,7 @@ const Logout = () => {
     const { logout, user } = useAuthContext();
 
     useEffect(() => {
+        console.log(user.accessToken);
         authService.logout(user.accessToken)
             .then(() => {
                 logout();

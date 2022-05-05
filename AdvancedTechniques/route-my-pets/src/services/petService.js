@@ -9,9 +9,9 @@ export const getAll = async () => {
 
 };
 
-export const getOne = async (petId) => {
+export const getOne = async (petId, signal) => {
 
-    let pet = await request.get(`${baseUrl}/pets/${petId}`);
+    let pet = await request.get(`${baseUrl}/pets/${petId}`, {signal});
     return pet;
 }
 

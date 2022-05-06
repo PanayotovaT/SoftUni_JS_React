@@ -15,6 +15,8 @@ export const getOne = async (petId, signal) => {
     return pet;
 }
 
+export const getMyPets = (userId) => request.get(`${baseUrl}/pets?where=_ownerId%3D%22${userId}%22`)
+
 export const create = async (pet, token) => {
     const response = await fetch(`${baseUrl}/pets`, {
         method: 'POST',

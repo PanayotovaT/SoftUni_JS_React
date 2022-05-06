@@ -1,22 +1,11 @@
-import { useEffect, useState } from 'react';
+import './PetList.css';
+
 import PetCard from './PetCard/PetCard';
-import * as petService from '../../services/petService';
 
+const PetList = ({
+    pets
+}) => {
 
-const PetList = () => {
-    const [pets, setPets] = useState([]);
-    useEffect(() => {
-        petService.getAll()
-            .then(result => {
-                    setPets(result);
-              
-            }).catch(err => {
-                console.log('err');
-                console.error(err.message)
-                return;
-            })
-            
-    }, []);
     return (
         <>
             {pets.length > 0

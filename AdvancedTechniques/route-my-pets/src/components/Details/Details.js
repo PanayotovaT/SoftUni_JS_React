@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams, Link  } from 'react-router-dom';
 
 import './Details.css'
@@ -16,9 +16,15 @@ const Details = () => {
     const { user } = useAuthContext();
     const { addNotification } = useNotificationContext()
     let { petId } = useParams();
-    const [pet] = usePetState(petId);
+    const [pet, setPet] = usePetState(petId);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
+    useEffect(() => {
+        likeService.getCount(petId)
+            .then(likeCount => {
+                setPet(state => ({...state, likes:likeCount}))
+            })
+    }, [petId, setPet]);
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -43,6 +49,7 @@ const Details = () => {
         e.preventDefault();
         likeService.like(user._id, petId)
             .then(res => {
+                setPet((s) => ({...s, likes: s.likes + 1}));
                 addNotification('Successfully liked a pet', types.success)
 
             });
@@ -77,7 +84,7 @@ const Details = () => {
 
                         <div className="likes">
                             <img className="hearts" src="/images/heart.png" alt="" />
-                            <span id="total-likes">Likes: {pet.likes?.length}</span>
+                            <span id="total-likes">Likes: {pet.likes}</span>
                         </div>
                     </div>
                 </div>

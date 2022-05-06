@@ -15,6 +15,7 @@ import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
 import ErrorBoundary from './Common/ErrorBoundary';
 import Notification from './Common/Notification';
+import PrivateRoute from './Common/PrivateRoute';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/home/*" element={<Home />} />
-                <Route path="/my-pets" element={<MyPets />} />
+                <Route path="/my-pets" element={<PrivateRoute><MyPets /></PrivateRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/create-pet" element={<Create />} />

@@ -9,6 +9,7 @@ import { useNotificationContext, types } from '../../contexts/NotificationContex
 
 import ConfirmDialog from '../../Common/ConfirmDialog';
 import { usePetState } from '../../hooks/usePetState';
+import { Button } from 'react-bootstrap';
 
 const Details = () => {
 
@@ -71,11 +72,12 @@ const Details = () => {
     const ownerButtons = (
         <>
             <Link className="button details-btn" to={`/edit-pet/${pet._id}`}>Edit</Link>
-            <Link className="button" to={`/delete/${pet._id}`} onClick={deleteClickHandler}>Delete</Link>
+            <Link className="button" to={`/delete/${pet._id}`} onClick={deleteClickHandler} >Delete</Link>
         </>
     );
+
     const publicButtons = (
-        <Link className="button" to={`/like/${pet._id}`} onClick={likeButtonClick} >Like</Link>
+        <Button className="button" to={`/like/${pet._id}`} onClick={likeButtonClick} disabled={pet.likes?.includes(user._id)}>Like</Button>
     );
 
     return (
@@ -91,11 +93,12 @@ const Details = () => {
                         {user._id && (user._id === pet._ownerId
                             ? ownerButtons
                             : publicButtons
+                            
                         )}
 
                         <div className="likes">
                             <img className="hearts" src="/images/heart.png" alt="" />
-                            <span id="total-likes">Likes: {pet.likes.length}</span>
+                            <span id="total-likes">Likes: {pet.likes?.length}</span>
                         </div>
                     </div>
                 </div>

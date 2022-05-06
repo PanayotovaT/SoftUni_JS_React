@@ -16,6 +16,7 @@ import Logout from './components/Logout/Logout';
 import ErrorBoundary from './Common/ErrorBoundary';
 import Notification from './Common/Notification';
 import PrivateRoute from './Common/PrivateRoute';
+import GuardedRoute from './Common/GuardedRoute';
 
 function App() {
 
@@ -34,10 +35,12 @@ function App() {
                 <Route path="/my-pets" element={<PrivateRoute><MyPets /></PrivateRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/create-pet" element={<Create />} />
-                <Route path="/edit-pet/:petId" element={<Edit />} />
                 <Route path="/details/:petId" element={<Details />} />
                 <Route path="/logout" element={<Logout />} />
+                <Route element={<GuardedRoute />}>
+                  <Route path="/create-pet" element={<Create />} />
+                  <Route path="/edit-pet/:petId" element={<Edit />} />
+                </Route>
               </Routes>
             </main>
 

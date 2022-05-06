@@ -9,13 +9,13 @@ const Logout = () => {
     const { logout, user } = useAuthContext();
 
     useEffect(() => {
-        console.log(user.accessToken);
         authService.logout(user.accessToken)
-            .then(() => {
+            .then((res) => {
+                console.log(res)
                 logout();
                   navigate('/login')
             })
-    }, [logout, user.accessToken, navigate])
+    }, [logout, navigate, user.accessToken])
     return null;
 };
 

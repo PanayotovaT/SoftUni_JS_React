@@ -48,11 +48,13 @@ export const isAuthenticated = () => {
 };
 
 export const logout = async (token) => {
-    return fetch(`${baseUrl}/logout`, {
+    const response = await fetch(`${baseUrl}/logout`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'X-Authorization': token
         }
-    })
+    });
+    return response;
+
 }

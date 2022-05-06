@@ -3,7 +3,9 @@ import { useNavigate, useParams, Link  } from 'react-router-dom';
 
 import './Details.css'
 import * as petService from '../../services/petService';
+import * as likeService from '../../services/likeService';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
 import ConfirmDialog from '../../Common/ConfirmDialog';
 import { usePetState } from '../../hooks/usePetState';
@@ -12,9 +14,9 @@ const Details = () => {
 
     const navigate = useNavigate();
     const { user } = useAuthContext();
-
+    const { addNotification } = useNotificationContext()
     let { petId } = useParams();
-    const [pet, setPet] = usePetState(petId);
+    const [pet] = usePetState(petId);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
 
@@ -39,22 +41,13 @@ const Details = () => {
 
     const likeButtonClick =(e) => {
         e.preventDefault();
+        likeService.like(user._id, petId)
+            .then(res => {
+                addNotification('Successfully liked a pet', types.success)
 
-        if(pet.likes.includes(user._id)) {
-            console.log('User already liked');
-            return;
-        }
-        let likes = [...pet.likes, user._id];
-        let likedPet = {...pet, likes};
+            });
 
-        petService.like(petId, likedPet, user.accessToken)
-            .then(pet =>{
-                console.log(pet);
-                setPet(state => ({
-                    ...state,
-                    likes
-                }))
-            })
+       
     }
 
     const ownerButtons = (

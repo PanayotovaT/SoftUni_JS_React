@@ -19,8 +19,6 @@ const MyPets = () => {
         <section id="my-pets-page" className="my-pets">
             <h1>My Pets</h1>
             <PetList pets={pets} />
-
-            <p className="no-pets">No pets in database!</p>
         </section>
     );
 };

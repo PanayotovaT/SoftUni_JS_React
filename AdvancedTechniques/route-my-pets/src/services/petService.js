@@ -45,18 +45,3 @@ export const update = (petId, pet) => {
     return request.put(`${baseUrl}/pets/${petId}`, pet)
 }
 
-export const like = (petId, pet, token) => {
-    // pet.likes = likes;
-    return fetch(`${baseUrl}/pets/${petId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify(pet)
-    })
-        .then(res => {
-            // console.log( res.json());
-            return res.json();
-        });
-}   

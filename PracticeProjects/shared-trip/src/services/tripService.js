@@ -12,17 +12,4 @@ export const deleteItem = async (id) => await requester.del(`${baseUrl}/${id}`);
 
 export const update = async (id, trip) => await requester.put(`${baseUrl}/${id}`, trip);
 
-export const getMyTrips = async (userId) => {
-    try {
-        const response = await fetch(`${baseUrl}`);
-        if (response.ok) {
-            const result = (await response.json()).filter(x => x._ownerId === userId);
-            return result;
-        } else {
-            throw new Error(response.statusText);
-        }
-    } catch (err) {
-        console.log(err.message)
-        return [];
-    }
-}
+export const getMyTrips = async (userId) => await requester.get(`${baseUrl}?where=_ownerId%3D%22${userId}%22`);

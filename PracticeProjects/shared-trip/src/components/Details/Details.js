@@ -69,7 +69,7 @@ const Details = () => {
                     <div>
                         <img className="img-fluid rounded"
                             src={trip.imageUrl}
-                            alt="car-image" />
+                            alt="car" />
                     </div>
                     <div className="trip-desc">
                         <h5>Information about the trip</h5>

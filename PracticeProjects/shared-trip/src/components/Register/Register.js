@@ -1,17 +1,14 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import * as authService from '../../services/authService';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const Register = () => {
     const navigate = useNavigate();
-    const [gender, setGender] = useState('male');
     const { login } = useContext(AuthContext);
 
-    const onChangeValue = (e) => {
-        setGender(e.target.value);
-    }
+
 
     const registerHandler = (e) => {
         e.preventDefault();
@@ -67,7 +64,7 @@ const Register = () => {
                                 name="repass" />
                         </div>
                         <label>Gender</label>
-                        <div className="gender" onChange={onChangeValue}>
+                        <div className="gender" >
                             <input type="radio" id="female" name="gender" value="female" />
                             <label htmlFor="female">Female</label>
                             <input type="radio" id="male" name="gender" value="male" defaultChecked />

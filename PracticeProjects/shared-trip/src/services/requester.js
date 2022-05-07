@@ -15,7 +15,7 @@ async function request(url, options) {
         }
     } catch (err) {
         console.log(err.message);
-        return;
+        throw new Error(err);
     }
 
 }
@@ -36,7 +36,7 @@ const getOptions = (method = 'GET', body) => {
         }
 
     } catch (err) {
-        return null;
+        return err;
     }
 
     if (token) {

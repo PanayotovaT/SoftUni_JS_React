@@ -17,12 +17,13 @@ const Login = () => {
 
         authService.login(email, password)
             .then(authData => {
+                console.log(authData);
                 login(authData);
                 navigate('/');
             })
             .catch(err => {
-                console.error(err);
-                return err
+                console.error(err.message);
+                return;
             })
     }
     return (

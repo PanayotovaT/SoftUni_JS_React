@@ -33,6 +33,7 @@ const Register = () => {
         }
         authService.register(email, password, gender)
             .then(authData => {
+
                 login(authData);
                 navigate('/')
             })

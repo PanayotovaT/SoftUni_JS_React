@@ -25,9 +25,21 @@ const getOptions = (method = 'GET', body) => {
         method,
         headers: {}
     }
-    const token = JSON.parse(localStorage.getItem('user')).accessToken;
 
-    if (token !== null) {
+
+    let token = null;
+
+    try {
+        const user = localStorage.getItem('user');
+        if(user) {
+            token = JSON.parse(user).accessToken;
+        }
+
+    } catch (err) {
+        return null;
+    }
+
+    if (token) {
         options.headers['X-Authorization'] = token;
     }
 
@@ -35,7 +47,6 @@ const getOptions = (method = 'GET', body) => {
         options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body);
     }
-
     return options;
 }
 

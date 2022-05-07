@@ -1,46 +1,15 @@
-const baseURl = 'http://localhost:3030/users'
+import * as requester from './requester';
 
-export const login = async (email, password) => {
+const baseUrl = 'http://localhost:3030/users'
 
-    const response  = await fetch(`${baseURl}/login`,{
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email, password})
-    });
+export const login = async (email, password) => await requester.post(`${baseUrl}/login`, {email, password});
 
-    const result = await response.json();
 
-    if(response.ok) {
-        return result;
-    } else {
-        throw result.message;
-    }
-    
-} 
 
-export const register = async (email, password, gender) => {
-
-    const response = await fetch(`${baseURl}/register`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({email, password, gender})
-    });
-
-    const result = await response.json();
-
-    if(response.ok) {
-        return result;
-    } else {
-        throw result;
-    }
-}
+export const register = async (email, password, gender) => await requester.post(`${baseUrl}/register`, {email, password, gender});
 
 export const logout = (token) => {
-    return fetch(`${baseURl}/logout`, {
+    return fetch(`${baseUrl}/logout`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

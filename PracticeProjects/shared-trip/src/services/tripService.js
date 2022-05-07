@@ -1,59 +1,28 @@
-const baseUrl = 'http://localhost:3030/data/trips'
+import * as requester from './requester';
 
-export const getAll = async () => {
-    const response = await fetch(`${baseUrl}`);
-    const reuslt = await response.json();
-    return reuslt;
-}
+const baseUrl = 'http://localhost:3030/data/trips';
 
-export const getOne = async (id) => {
-    const response = await fetch(`${baseUrl}/${id}`);
-    const reuslt = await response.json();
-    return reuslt;
-}
+export const getAll = async () => await requester.get(baseUrl);
 
-export const create = async (trip, token) => {
-    const response  = await fetch(`${baseUrl}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify(trip)
-    });
-    const result = await response.json();
-    return result;
-}
+export const getOne = async (id) => await requester.get(`${baseUrl}/${id}`);
 
-export const deleteItem = async (id, token) => {
-    const response = await fetch(`${baseUrl}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': token
-        }
-    });
-    const result = await response;
-    return result;
-}
+export const create = async (trip) => await requester.post(baseUrl, trip);
 
-export const update = async (id, trip, token) => {
-    const response  =  await fetch(`${baseUrl}/${id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Authorization': token
-        },
-        body: JSON.stringify(trip)
-    });
+export const deleteItem = async (id) => await requester.del(`${baseUrl}/${id}`);
 
-    const result = await response.json();
-
-    return result;
-}
+export const update = async (id, trip) => await requester.put(`${baseUrl}/${id}`, trip);
 
 export const getMyTrips = async (userId) => {
-    const response = await fetch(`${baseUrl}`);
-    const result = (await response.json()).filter(x => x._ownerId === userId);
-    return result;
+    try {
+        const response = await fetch(`${baseUrl}`);
+        if (response.ok) {
+            const result = (await response.json()).filter(x => x._ownerId === userId);
+            return result;
+        } else {
+            throw new Error(response.statusText);
+        }
+    } catch (err) {
+        console.log(err.message)
+        return [];
+    }
 }

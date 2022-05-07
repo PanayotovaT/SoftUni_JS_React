@@ -1,12 +1,9 @@
-import  { useContext } from 'react';
 import  { useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../../contexts/AuthContext';
 import * as tripService from '../../services/tripService';
 
 const Create = () => {
     const navigate = useNavigate();
-const { user } = useContext(AuthContext);
 
     const createHandler = (e) => {
         e.preventDefault();
@@ -37,7 +34,7 @@ const { user } = useContext(AuthContext);
 
         }
 
-     tripService.create(trip, user.accessToken)
+     tripService.create(trip)
         .then(result => {
             navigate('/shared-trips');
         })

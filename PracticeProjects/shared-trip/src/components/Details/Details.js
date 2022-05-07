@@ -21,7 +21,7 @@ const Details = () => {
 
     const deleteHandler = (e) => {
         e.preventDefault();
-        tripService.deleteItem(id, user.accessToken)
+        tripService.deleteItem(id)
             .then(res => {
                 navigate('/')
             })

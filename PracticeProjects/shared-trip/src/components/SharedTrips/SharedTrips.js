@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import TripCard from './TripCard/TripCard';
 import * as tripService from '../../services/tripService';
@@ -22,10 +21,10 @@ const SharedTrips = () => {
             </header>
             <div className="row text-center">
 
-                {trips.length > 0
+                {trips?.length > 0
                     ? trips.map(x => <TripCard key={x._id} trip={x} />)
                     : (<div className="no-trips">
-                        <img src="https://www.stagweb.co.uk/img/activities/big/sexyhitchhiker1.jpg" />
+                        <img src="https://www.stagweb.co.uk/img/activities/big/sexyhitchhiker1.jpg" alt="test"/>
                         <p className="lead">Hitchhiker time...</p>
                     </div>)
                 }

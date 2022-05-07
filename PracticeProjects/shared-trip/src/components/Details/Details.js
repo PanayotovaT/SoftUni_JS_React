@@ -1,23 +1,18 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import * as tripService from '../../services/tripService';
 import { AuthContext } from '../../contexts/AuthContext';
+import useTrip from '../../hooks/useTrip';
 
 
 
 const Details = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
-    const [trip, setTrip] = useState({});
     const id = useParams().carId;
+    const [trip] = useTrip(id);
 
-    useEffect(() => {
-        tripService.getOne(id)
-            .then(trip => {
-                setTrip(trip);
-            })
-    }, [id]);
 
     const deleteHandler = (e) => {
         e.preventDefault();

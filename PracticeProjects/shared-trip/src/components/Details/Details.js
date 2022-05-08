@@ -35,7 +35,7 @@ const Details = () => {
             return;
         }
 
-        if (trip.buddies?.includes(user._id)) {
+        if (trip.buddies?.includes(user.email)) {
             console.error('You already joined this trip');
             return;
         }
@@ -45,9 +45,10 @@ const Details = () => {
             return;
         }
 
-        joinTripService.joinTrip(id, user._id)
+        joinTripService.joinTrip(id, user.email)
             .then(res => {
-                setTrip(s => ({ ...s, buddies: [...s.buddies, res.userId], availableSeats: s.availableSeats - 1 }));
+                console.log(res);
+                setTrip(s => ({ ...s, buddies: [...s.buddies, res.email], availableSeats: s.availableSeats - 1 }));
 
             })
             .catch(err => {
@@ -64,7 +65,7 @@ const Details = () => {
 
     const guestButtons = (
         <>
-            {trip.buddies?.includes(user._id)
+            {trip.buddies?.includes(user.email)
                 ? <span className="btn btn-info">Already joined. Don't be late!</span>
                 : (trip.availableSeats > 0
                     ? <button className="btn btn-join" onClick={joinTripHandler} >Join now, {trip.availableSeats} seats left!</button>

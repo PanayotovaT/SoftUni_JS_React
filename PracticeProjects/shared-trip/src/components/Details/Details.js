@@ -1,9 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
 import * as tripService from '../../services/tripService';
+import * as joinTripService from '../../services/joinTripService';
 import { AuthContext } from '../../contexts/AuthContext';
 import useTrip from '../../hooks/useTrip';
+
+
 
 
 
@@ -11,8 +14,15 @@ const Details = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const id = useParams().carId;
-    const [trip] = useTrip(id);
+    const [trip, setTrip] = useTrip(id);
 
+    useEffect(() => {
+        joinTripService.getBuddies(id)
+            .then(buddies => {
+                console.log(buddies);
+                setTrip(s => ({ ...s, buddies }))
+            })
+    }, [id, setTrip]);
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -20,6 +30,30 @@ const Details = () => {
             .then(res => {
                 navigate('/')
             })
+    }
+
+    const joinTripHandler = (e) => {
+        e.preventDefault();
+
+        if (trip._ownerId == user._id) {
+            console.error('You cannot join your own trip!');
+            return;
+        }
+
+        if (trip.buddies?.includes(user._id)) {
+            console.error('You already joined this trip');
+            return;
+        }
+
+        joinTripService.joinTrip(id, user._id)
+            .then(res => {
+                setTrip(s => ({ ...s, buddies: [...s.buddies, res.userId] }));
+            })
+            .catch(err => {
+                return;
+            })
+
+
     }
 
     const ownerButtons = (
@@ -31,8 +65,11 @@ const Details = () => {
 
     const guestButtons = (
         <>
-            <a href={`/join/${trip._id}`} className="btn btn-join">Join now, {trip.seats} seats left!</a>
-            <span className="btn btn-info">Already joined. Don't be late!</span>
+            {trip.buddies?.includes(user._id)
+                ? <span className="btn btn-info">Already joined. Don't be late!</span>
+                : <button className="btn btn-join" onClick={joinTripHandler} >Join now, {trip.seats} seats left!</button>
+            }
+
             <span className="btn btn-secondary">No seats available! [0]</span>
         </>
     )

@@ -6,10 +6,6 @@ import * as joinTripService from '../../services/joinTripService';
 import { AuthContext } from '../../contexts/AuthContext';
 import useTrip from '../../hooks/useTrip';
 
-
-
-
-
 const Details = () => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -19,8 +15,7 @@ const Details = () => {
     useEffect(() => {
         joinTripService.getBuddies(id)
             .then(buddies => {
-                console.log(buddies);
-                setTrip(s => ({ ...s, buddies }))
+                setTrip(s => ({ ...s, buddies, availableSeats: Number(s.seats) - buddies.length }));
             })
     }, [id, setTrip]);
 
@@ -45,15 +40,19 @@ const Details = () => {
             return;
         }
 
+        if (trip.availableSeats == 0) {
+            console.log('No more available seats');
+            return;
+        }
+
         joinTripService.joinTrip(id, user._id)
             .then(res => {
-                setTrip(s => ({ ...s, buddies: [...s.buddies, res.userId] }));
+                setTrip(s => ({ ...s, buddies: [...s.buddies, res.userId], availableSeats: s.availableSeats - 1 }));
+
             })
             .catch(err => {
                 return;
             })
-
-
     }
 
     const ownerButtons = (
@@ -67,10 +66,12 @@ const Details = () => {
         <>
             {trip.buddies?.includes(user._id)
                 ? <span className="btn btn-info">Already joined. Don't be late!</span>
-                : <button className="btn btn-join" onClick={joinTripHandler} >Join now, {trip.seats} seats left!</button>
+                : (trip.availableSeats > 0
+                    ? <button className="btn btn-join" onClick={joinTripHandler} >Join now, {trip.availableSeats} seats left!</button>
+                    : <span className="btn btn-secondary">No seats available! [0]</span>
+                )
             }
 
-            <span className="btn btn-secondary">No seats available! [0]</span>
         </>
     )
     return (
@@ -95,8 +96,6 @@ const Details = () => {
                             ? <p>{trip.buddies.join(', ')}</p>
                             : <p>there are no buddies yet...</p>
                         }
-
-
                     </div>
                     <h5>Driver: <span>{user.email}</span> </h5>
                 </div>
@@ -119,7 +118,6 @@ const Details = () => {
                                 ? ownerButtons
                                 : guestButtons
                             }
-
 
                         </div>
 

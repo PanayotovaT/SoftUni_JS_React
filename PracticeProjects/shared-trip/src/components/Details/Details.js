@@ -17,6 +17,10 @@ const Details = () => {
             .then(buddies => {
                 setTrip(s => ({ ...s, buddies, availableSeats: Number(s.seats) - buddies.length }));
             })
+            .catch(err => {
+                setTrip(s => ({ ...s, buddies: [], availableSeats: Number(s.seats)}));
+                
+            })
     }, [id, setTrip]);
 
     const deleteHandler = (e) => {
@@ -47,7 +51,6 @@ const Details = () => {
 
         joinTripService.joinTrip(id, user.email)
             .then(res => {
-                console.log(res);
                 setTrip(s => ({ ...s, buddies: [...s.buddies, res.email], availableSeats: s.availableSeats - 1 }));
 
             })

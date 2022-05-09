@@ -14,11 +14,11 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useLocalStorage('user', initialUser);
 
     const login = (authData) => {
-        setUser('user', authData);
+        setUser(authData);
     }
 
     const logout = () => {
-        setUser(initialUser);
+        setUser('user', initialUser);
     }
 
     return (<AuthContext.Provider value={{user, login, logout, isAuthenticated: Boolean(user.accessToken)}}>

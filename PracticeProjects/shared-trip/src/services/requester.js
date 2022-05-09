@@ -1,13 +1,13 @@
 async function request(url, options) {
-
-    const response = await fetch(url, options)
-
     try {
+        const response = await fetch(url, options)
+
+
         if (response.ok) {
             try {
                 return await response.json();
             } catch (err) {
-                return response;
+                return await response;
             }
         } else {
             const result = await response.json();
@@ -16,6 +16,7 @@ async function request(url, options) {
     } catch (err) {
         console.log(err.message);
         throw new Error(err);
+        // return;
     }
 
 }
@@ -31,7 +32,7 @@ const getOptions = (method = 'GET', body) => {
 
     try {
         const user = localStorage.getItem('user');
-        if(user) {
+        if (user) {
             token = JSON.parse(user).accessToken;
         }
 

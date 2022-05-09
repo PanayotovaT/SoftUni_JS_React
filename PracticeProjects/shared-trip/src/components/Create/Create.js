@@ -1,5 +1,6 @@
 import  { useNavigate } from 'react-router-dom';
 
+import isAuth from '../../hoc/isAuth';
 import * as tripService from '../../services/tripService';
 
 const Create = () => {
@@ -96,4 +97,4 @@ const Create = () => {
     );
 }
 
-export default Create;
+export default isAuth(Create);

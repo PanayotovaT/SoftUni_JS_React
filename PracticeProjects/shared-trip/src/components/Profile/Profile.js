@@ -13,12 +13,12 @@ const Profile = () => {
             .then(myTrips => {
                 setTrips(myTrips);
             })
-    }, []);
+    }, [user._id]);
 
     return (
         <section className="profile col-md-6 text-center col-lg" id="profile-page">
         <div className="profile-container">
-            <img className="profile-img" src={`/images/${user.gender}.png`} />
+            <img className="profile-img" src={`/images/${user.gender}.png`} alt="profile" />
             <p>Email: <span>{user.email}</span></p>
         </div>
         <div className="profile-info">

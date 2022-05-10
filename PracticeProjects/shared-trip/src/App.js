@@ -1,4 +1,6 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
@@ -16,41 +18,45 @@ import Logout from './components/Logout/Logout';
 
 import PrivateRoute from './common/PrivateRoute';
 import GuardedRoute from './common/GuardedRoute';
+import { NotifiactionProvider } from './contexts/NotificationContext';
+import Notification from './common/Notification';
 
 function App() {
 
   return (
+    <NotifiactionProvider>
+      <AuthProvider>
 
-    <AuthProvider>
+        <div className="App">
+          <Header />
+          <Notification />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/shared-trips" element={< SharedTrips />} />
+              <Route path="/profile" element={<PrivateRoute>< Profile /></PrivateRoute>} />
+              <Route path="/details/:carId" element={< Details />} />
+              <Route path="/*" element={< NotFound />} />
+              <Route element={<GuardedRoute />}>
+                <Route path="/create" element={<Create />} />
+                <Route path="/edit/:carId" element={< Edit />} />
 
-      <div className="App">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/shared-trips" element={< SharedTrips />} />
-            <Route path="/profile" element={<PrivateRoute>< Profile /></PrivateRoute>} />
-            <Route path="/details/:carId" element={< Details />} />
-            <Route path="/*" element={< NotFound />} />
-            <Route element={<GuardedRoute />}>
-              <Route path="/create" element={<Create />} />
-              <Route path="/edit/:carId" element={< Edit />} />
+              </Route>
 
-            </Route>
+            </Routes>
+          </main>
 
-          </Routes>
-        </main>
-
-        <footer id="sticky-footer" className="bg-dark">
-          <div className="container">
-            <p className="m-0 text-center text-white">Copyright &copy; Shared Trip 2021</p>
-          </div>
-        </footer>
-      </div>
-    </AuthProvider>
+          <footer id="sticky-footer" className="bg-dark">
+            <div className="container">
+              <p className="m-0 text-center text-white">Copyright &copy; Shared Trip 2021</p>
+            </div>
+          </footer>
+        </div>
+      </AuthProvider>
+    </NotifiactionProvider>
   );
 }
 

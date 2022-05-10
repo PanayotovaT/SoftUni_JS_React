@@ -16,6 +16,7 @@ const Notification = () => {
         <Toast.Header onClick={hideNotification} closeButton={false}>
           <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
           <strong className="me-auto">My Pets</strong>
+         
         </Toast.Header>
         <Toast.Body >
           {notification.message}

@@ -3,10 +3,12 @@ import { useContext } from 'react';
 
 import * as authService from '../../services/authService';
 import { AuthContext } from '../../contexts/AuthContext';
+import { useNotifiactionContext } from '../../contexts/NotificationContext';
 
 const Login = () => {
     const navigate = useNavigate();
     const { login } =  useContext(AuthContext);
+    const { showNotification } = useNotifiactionContext()
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -18,10 +20,12 @@ const Login = () => {
         authService.login(email, password)
             .then(authData => {
                 login(authData);
+                showNotification('You have successfully logged in', 'success');
                 navigate('/');
             })
             .catch(err => {
                 console.error(err.message);
+                showNotification(err.message);
                 return;
             })
     }

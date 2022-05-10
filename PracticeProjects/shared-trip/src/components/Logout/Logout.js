@@ -15,7 +15,7 @@ const Logout = () => {
                 navigate('/login')
             })
 
-    }, [])
+    }, [logout, navigate, user.accessToken])
 
     return null;
 }

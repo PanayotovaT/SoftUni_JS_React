@@ -3,7 +3,7 @@ import { useContext } from 'react';
 
 import * as authService from '../../services/authService';
 import { AuthContext } from '../../contexts/AuthContext';
-import { useNotifiactionContext } from '../../contexts/NotificationContext';
+import { useNotifiactionContext, types } from '../../contexts/NotificationContext';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
         authService.login(email, password)
             .then(authData => {
                 login(authData);
-                showNotification('You have successfully logged in', 'success');
+                showNotification('You have successfully logged in', types.success);
                 navigate('/');
             })
             .catch(err => {

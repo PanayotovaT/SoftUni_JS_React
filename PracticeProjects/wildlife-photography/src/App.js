@@ -5,6 +5,7 @@ import Create from './components/Create/Create';
 import Home from './components/Home/Home';
 import Dashboard from './components/Dashboard/Dashboard';
 import Details from './components/Details/Details';
+import Edit from './components/Edit/Edit';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/create" element={<Create />} />
           <Route path="/details/:postId" element={<Details />} />
+          <Route path="/edit/:postId" element={<Edit />} />
         </Routes>
 
       </main>

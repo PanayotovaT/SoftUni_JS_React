@@ -3,7 +3,7 @@ const Header = () => {
 
     return (
         <nav>
-            <img src="./img/logo.png" alt="logo" />
+            <img src="/img/logo.png" alt="logo" />
 
             <ul className="menu">
                 <li><NavLink to="/">Home</NavLink></li>

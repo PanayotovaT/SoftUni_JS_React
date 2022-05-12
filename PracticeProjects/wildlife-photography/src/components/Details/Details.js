@@ -32,7 +32,7 @@ const Details = () => {
                         </div>
                     </div>
                     <div className="card_right">
-                        <img src="/img/animal.jpg" alt="image" />
+                        <img src="/img/animal.jpg" alt="animal" />
                     </div>
                 </div>
 

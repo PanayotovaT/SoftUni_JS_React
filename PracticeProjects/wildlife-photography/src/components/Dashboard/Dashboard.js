@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const Dashboard = () => {
 
     return (
@@ -14,7 +16,7 @@ const Dashboard = () => {
                     <div className="back">
                         <h2>Title</h2>
                         <p>Description: A mountain is an elevated portion of the Earth's crust, generally with steep sides that show significant exposed bedrock.</p>
-                        <a href="#" className="details">Details</a>
+                        <Link to="/details/123" className="details">Details</Link>
                     </div>
                 </div>
 
@@ -26,7 +28,7 @@ const Dashboard = () => {
                     <div className="back">
                         <h2>Title</h2>
                         <p>Description: A waterfall is a point in a river or stream where water flows over a vertical drop or a series of steep drops.</p>
-                        <a href="#" className="details">Details</a>
+                        <Link to="/details/123" className="details">Details</Link>
                     </div>
                 </div>
 

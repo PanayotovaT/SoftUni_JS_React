@@ -7,6 +7,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
 import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/details/:postId" element={<Details />} />
           <Route path="/edit/:postId" element={<Edit />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
 
       </main>

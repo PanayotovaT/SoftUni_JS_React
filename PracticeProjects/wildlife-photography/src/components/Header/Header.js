@@ -1,21 +1,21 @@
-
+import { NavLink } from "react-router-dom";
 const Header = () => {
 
     return (
         <nav>
-        <img src="/img/logo.png" alt="logo" />
+            <img src="./img/logo.png" alt="logo" />
 
-        <ul class="menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">All Posts</a></li>
-            <li><a href="#">Create Post</a></li>
-            <li><a href="#">Posts of [email]</a></li>
-            <li><a href="#">Logout</a></li>
-            <li><a href="#">Register</a></li>
-            <li><a href="#">Login</a></li>
-        </ul>
+            <ul className="menu">
+                <li><NavLink to="/">Home</NavLink></li>
+                <li><NavLink to="/dashboard">All Posts</NavLink></li>
+                <li><NavLink to="/create">Create Post</NavLink></li>
+                <li><NavLink to="/profile">Posts of [email]</NavLink></li>
+                <li><NavLink to="/logout">Logout</NavLink></li>
+                <li><NavLink to="/register">Register</NavLink></li>
+                <li><NavLink to="/login">Login</NavLink></li>
+            </ul>
 
-    </nav>
+        </nav>
     );
 }
 

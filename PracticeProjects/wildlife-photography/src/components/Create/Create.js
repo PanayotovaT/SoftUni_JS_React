@@ -1,6 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 
+import * as postService from '../../services/postService';
 
 const Create = () => {
+    const navigate = useNavigate();
 
     const createHandler = (e) => {
         e.preventDefault();
@@ -17,6 +20,16 @@ const Create = () => {
         if(title == '' || keyword == '' || location == '' || date=='' || imageUrl == '' || description == '') {
             throw new Error('All fields are required');
         }
+
+        postService.create({ title, keyword, location, date, imageUrl, description })
+            .then(res => {
+                console.log(res)
+                navigate('/dashboard');
+            })
+            .catch(err => {
+                console.log(err.message);
+                return;
+            })
     }
     return (
 

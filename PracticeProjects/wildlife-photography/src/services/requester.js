@@ -15,7 +15,7 @@ const request = async (url, options) => {
         }
 
     } catch (err) {
-        console.log(err);
+        console.log(err.message);
         throw new Error(err);
     }
 
@@ -33,6 +33,7 @@ const getOptions = (method='GET', body ) => {
 
     try {
        const user = localStorage.getItem('user');
+
        if(user) {
            token = JSON.parse(user).accessToken
        }

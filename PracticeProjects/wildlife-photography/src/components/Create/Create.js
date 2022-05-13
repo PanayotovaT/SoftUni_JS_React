@@ -1,5 +1,23 @@
+
+
 const Create = () => {
 
+    const createHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const title = formData.get('title');
+        const keyword = formData.get('keyword');
+        const location = formData.get('location');
+        const date = formData.get('date');
+        const imageUrl = formData.get('imageUrl');
+        const description = formData.get('description');
+
+        if(title == '' || keyword == '' || location == '' || date=='' || imageUrl == '' || description == '') {
+            throw new Error('All fields are required');
+        }
+    }
     return (
 
         <section id="create-page">
@@ -8,7 +26,7 @@ const Create = () => {
                     <h2>Create your post, share information about wildlife.</h2>
                 </div>
 
-                <form method="POST" className="createForm">
+                <form method="POST" className="createForm" onSubmit={createHandler}>
                     <h2>Create Post</h2>
                     <ul className="noBullet">
                         <li>

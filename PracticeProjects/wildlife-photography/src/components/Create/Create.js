@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 
 import * as postService from '../../services/postService';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const Create = () => {
     const navigate = useNavigate();
+    const { user } = useAuthContext();
+
+    const name = `${user.firstName} ${user.lastName}`;
 
     const createHandler = (e) => {
         e.preventDefault();
@@ -21,7 +25,7 @@ const Create = () => {
             throw new Error('All fields are required');
         }
 
-        postService.create({ title, keyword, location, date, imageUrl, description })
+        postService.create({ title, keyword, location, date, imageUrl, description, name })
             .then(res => {
                 console.log(res)
                 navigate('/dashboard');

@@ -1,6 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
+import usePost from '../../hooks/usePost';
 
 const Details = () => {
+    const { postId } = useParams();
+    const [post, setPost] = usePost(postId);
 
     return (
         <>
@@ -10,22 +14,21 @@ const Details = () => {
                     <div className="card_left">
                         <div className="card_datails">
 
-                            <h1>Title: Two golden snub-nosed monkeys</h1>
-                            <h3>Created by an author: Alex Petkov</h3>
+                            <h1>Title: {post.title}</h1>
+                            <h3>Created by an author: {post.name}</h3>
                             <div className="card_animal">
-                                <p className="card-keyword">Keyword: Animal</p>
-                                <p className="card-location">Location: North America</p>
-                                <p className="card-date">Date: 18.02.2021</p>
+                                <p className="card-keyword">Keyword: {post.keyword}</p>
+                                <p className="card-location">Location: {post.location}</p>
+                                <p className="card-date">Date: {post.date}</p>
                             </div>
 
-                            <p className="disc">Description: Monkey, in general, any of nearly 200 species of tailed primate, with the exception of lemurs, tarsiers, and lorises.All but the durukuli of tropical Central and South America are active during the day, moving
-                                frequently in bands as they search for vegetation.</p>
+                            <p className="disc">Description: {post.description}</p>
 
                             <div className="social-btn">
-                                <Link to="/edit" className="edit-btn">Edit</Link>
-                                <Link to="/delete" className="del-btn">Delete</Link>
-                                <Link to="/like" className="vote-up">UpVote +1</Link>
-                                <Link to="/dislike" className="vote-down">DownVote -1</Link>
+                                <Link to={`/edit/${postId}`} className="edit-btn">Edit</Link>
+                                <Link to={`/delete/${postId}`} className="del-btn">Delete</Link>
+                                <Link to={`/like/${postId}`} className="vote-up">UpVote +1</Link>
+                                <Link to={`/dislike/${postId}`} className="vote-down">DownVote -1</Link>
                                 <p className="thanks-for-vote">Thanks For Voting</p>
 
                             </div>

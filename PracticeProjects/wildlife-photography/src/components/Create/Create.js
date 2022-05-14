@@ -27,7 +27,6 @@ const Create = () => {
 
         postService.create({ title, keyword, location, date, imageUrl, description, name })
             .then(res => {
-                console.log(res)
                 navigate('/dashboard');
             })
             .catch(err => {

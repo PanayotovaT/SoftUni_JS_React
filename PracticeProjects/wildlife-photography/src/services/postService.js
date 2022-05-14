@@ -11,3 +11,5 @@ export const create = async ( data ) => await request.post(baseUrl, data);
 export const update = async ( postId, data ) => await request.put(`${baseUrl}/${postId}`, data);
 
 export const deleteItem = async ( postId ) => await request.deleteItem(`${baseUrl}/${postId}`);
+
+export const getMyPosts =  async ( userId ) =>  await request.get(`${baseUrl}?where=_ownerId%3D%22${userId}%22`);

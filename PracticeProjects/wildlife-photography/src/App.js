@@ -11,6 +11,7 @@ import Register from './components/Register/Register';
 
 import { AuthProvider } from './contexts/AuthContext';
 import Logout from './components/Logout/Logout';
+import MyPosts from './components/MyPosts/MyPosts';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/create" element={<Create />} />
             <Route path="/details/:postId" element={<Details />} />
             <Route path="/edit/:postId" element={<Edit />} />
+            <Route path="/my-posts" element={<MyPosts />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />

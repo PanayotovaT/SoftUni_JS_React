@@ -8,7 +8,7 @@ const Header = () => {
     const userLinks = (
         <>
             <li><NavLink to="/create">Create Post</NavLink></li>
-            <li><NavLink to="/profile">Posts of {user.email}</NavLink></li>
+            <li><NavLink to="/my-posts">Posts of {user.email}</NavLink></li>
             <li><NavLink to="/logout">Logout</NavLink></li>
 
         </>

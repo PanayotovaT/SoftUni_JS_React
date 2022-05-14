@@ -7,7 +7,7 @@ const Edit = () => {
     const navigate = useNavigate();
     const { postId } = useParams();
 
-    const [post, setPost] = usePost(postId);
+    const [post] = usePost(postId);
 
     const updateHandler = (e) => {
         e.preventDefault();

@@ -12,6 +12,8 @@ import Register from './components/Register/Register';
 import { AuthProvider } from './contexts/AuthContext';
 import Logout from './components/Logout/Logout';
 import MyPosts from './components/MyPosts/MyPosts';
+import PublicRoute from './common/PublicRoute';
+import PrivateRoute from './common/PrivateRoute';
 
 function App() {
   return (
@@ -23,13 +25,18 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/details/:postId" element={<Details />} />
-            <Route path="/edit/:postId" element={<Edit />} />
-            <Route path="/my-posts" element={<MyPosts />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
+            <Route element={<PublicRoute />} >
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+
+            </Route>
+            <Route element={<PrivateRoute />} >
+              <Route path="/create" element={<Create />} />
+              <Route path="/details/:postId" element={<Details />} />
+              <Route path="/edit/:postId" element={<Edit />} />
+              <Route path="/my-posts" element={<MyPosts />} />
+              <Route path="/logout" element={<Logout />} />
+            </Route>
           </Routes>
 
         </main>

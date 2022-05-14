@@ -1,42 +1,41 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
+import Card from './Card/Card';
+import * as postService from '../../services/postService';
 
 const Dashboard = () => {
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        postService.getAll()
+            .then(res => {
+                setPosts(Object.values(res));
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            })
+    }, []);
 
     return (
 
         <section id="catalog">
             <h1>All posts</h1>
             <div className="band">
+                {posts.length > 0
 
-                <div className="flip flip-vertical">
-                    <div className="front">
-                        <img src="/img/pexels-photo-540518.png" alt="image_nature_1" />
-                        <h1 className="text-shadow">Keyword: Mountain</h1>
-                    </div>
-                    <div className="back">
-                        <h2>Title</h2>
-                        <p>Description: A mountain is an elevated portion of the Earth's crust, generally with steep sides that show significant exposed bedrock.</p>
-                        <Link to="/details/123" className="details">Details</Link>
-                    </div>
-                </div>
-
-                <div className="flip flip-vertical">
-                    <div className="front">
-                        <img src="/img/big-waterfall-dario-428.jpg" alt="image_nature_2" />
-                        <h1 className="text-shadow">Key word: Waterfall</h1>
-                    </div>
-                    <div className="back">
-                        <h2>Title</h2>
-                        <p>Description: A waterfall is a point in a river or stream where water flows over a vertical drop or a series of steep drops.</p>
-                        <Link to="/details/123" className="details">Details</Link>
-                    </div>
-                </div>
+                    ? posts.map(x => <Card key={x._id} card={x} />)
+                    : (
+                        <>
+                            <div className="no-posts-img">
+                                <img src="/img/animal.jpg" alt="image_nature_3" />
+                            </div>
+                            <p className="no-offer">There are no posts yet...</p>
+                        </>
+                    )
+                }
 
 
-                <div className="no-posts-img">
-                    <img src="/img/animal.jpg" alt="image_nature_3" />
-                </div>
-                <p className="no-offer">There are no posts yet...</p>
             </div>
 
         </section >

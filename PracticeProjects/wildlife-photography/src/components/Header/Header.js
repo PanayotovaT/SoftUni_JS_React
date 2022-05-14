@@ -1,14 +1,17 @@
 import { NavLink } from "react-router-dom";
 
+import './Header.css';
 import { useAuthContext } from '../../contexts/AuthContext';
+
 
 const Header = () => {
     const { user } = useAuthContext();
 
+    const isActive = ({ isActive }) => isActive ? 'isActive' : '';
     const userLinks = (
         <>
-            <li><NavLink to="/create">Create Post</NavLink></li>
-            <li><NavLink to="/my-posts">Posts of {user.email}</NavLink></li>
+            <li><NavLink to="/create" className={isActive} >Create Post</NavLink></li>
+            <li><NavLink to="/my-posts" className={isActive}>Posts of {user.email}</NavLink></li>
             <li><NavLink to="/logout">Logout</NavLink></li>
 
         </>
@@ -16,8 +19,8 @@ const Header = () => {
 
     const guestLinks = (
         <>
-            <li><NavLink to="/register">Register</NavLink></li>
-            <li><NavLink to="/login">Login</NavLink></li>
+            <li><NavLink to="/register" className={isActive}>Register</NavLink></li>
+            <li><NavLink to="/login" className={isActive}>Login</NavLink></li>
         </>
     )
 
@@ -26,8 +29,8 @@ const Header = () => {
             <img src="/img/logo.png" alt="logo" />
 
             <ul className="menu">
-                <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/dashboard">All Posts</NavLink></li>
+                <li><NavLink to="/" className={isActive}>Home</NavLink></li>
+                <li><NavLink to="/dashboard" className={isActive}>All Posts</NavLink></li>
                 {user.email 
                     ? userLinks
                     : guestLinks

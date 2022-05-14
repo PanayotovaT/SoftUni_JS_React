@@ -1,4 +1,4 @@
-import { useState, useEffect, Navigate } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as postService from '../services/postService';
 
@@ -16,7 +16,7 @@ const usePost = (postId) => {
                 navigate('/not-found');
                 return;
             })
-    }, [postId]);
+    }, [postId, navigate]);
 
 
     return [state, setState]

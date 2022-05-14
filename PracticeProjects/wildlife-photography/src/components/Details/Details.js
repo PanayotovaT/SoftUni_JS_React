@@ -1,4 +1,5 @@
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
+
 
 import { useAuthContext } from '../../contexts/AuthContext';
 import usePost from '../../hooks/usePost';
@@ -20,7 +21,7 @@ const Details = () => {
             })
             .catch(err => {
                 console.error(err.message);
-                return;
+                return err;
             })
 
     }

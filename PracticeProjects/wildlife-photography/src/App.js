@@ -14,6 +14,7 @@ import Logout from './components/Logout/Logout';
 import MyPosts from './components/MyPosts/MyPosts';
 import PublicRoute from './common/PublicRoute';
 import PrivateRoute from './common/PrivateRoute';
+import NotFound from './components/NotFound/NotFound';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Header />
         <main>
           <Routes>
+            <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Home />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route element={<PublicRoute />} >
@@ -37,6 +39,7 @@ function App() {
               <Route path="/my-posts" element={<MyPosts />} />
               <Route path="/logout" element={<Logout />} />
             </Route>
+
           </Routes>
 
         </main>

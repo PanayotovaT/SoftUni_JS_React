@@ -1,5 +1,4 @@
 const request = async (url, options) => {
-
     try {
         const response = await fetch(url, options);
 
@@ -15,8 +14,8 @@ const request = async (url, options) => {
         }
 
     } catch (err) {
-        console.log(err.message);
-        throw new Error(err);
+        // console.log(err.message);
+        throw new Error(err.message);
     }
 
 

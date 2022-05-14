@@ -1,11 +1,44 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
+import { useAuthContext } from '../../contexts/AuthContext';
 import usePost from '../../hooks/usePost';
+import * as postService from '../../services/postService';
 
 const Details = () => {
+    const navigate = useNavigate();
     const { postId } = useParams();
     const [post, setPost] = usePost(postId);
+    const { user } = useAuthContext();
 
+    const deleteHandler = (e) => {
+        e.preventDefault();
+
+        postService.deleteItem(postId) 
+            .then(res => {
+
+                navigate('/dashboard');
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            })
+
+    }
+
+    const ownerLinks = (
+        <>
+            <Link to={`/edit/${postId}`} className="edit-btn">Edit</Link>
+            <Link to={`/delete/${postId}`} className="del-btn" onClick={deleteHandler}>Delete</Link>
+        </>
+    );
+
+    const userLinks = (
+        <>
+            <Link to={`/like/${postId}`} className="vote-up">UpVote +1</Link>
+            <Link to={`/dislike/${postId}`} className="vote-down">DownVote -1</Link>
+            <p className="thanks-for-vote">Thanks For Voting</p>
+        </>
+    )
     return (
         <>
             <section id="details-page">
@@ -25,17 +58,17 @@ const Details = () => {
                             <p className="disc">Description: {post.description}</p>
 
                             <div className="social-btn">
-                                <Link to={`/edit/${postId}`} className="edit-btn">Edit</Link>
-                                <Link to={`/delete/${postId}`} className="del-btn">Delete</Link>
-                                <Link to={`/like/${postId}`} className="vote-up">UpVote +1</Link>
-                                <Link to={`/dislike/${postId}`} className="vote-down">DownVote -1</Link>
-                                <p className="thanks-for-vote">Thanks For Voting</p>
+                            {user._id == post._ownerId
+                                ? ownerLinks
+                                : userLinks
+                            }
+
 
                             </div>
                         </div>
                     </div>
                     <div className="card_right">
-                        <img src="/img/animal.jpg" alt="animal" />
+                        <img src={post.imageUrl} alt="animal" />
                     </div>
                 </div>
 

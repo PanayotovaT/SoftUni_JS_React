@@ -1,4 +1,39 @@
+import { useNavigate, useParams } from 'react-router-dom';
+
+import usePost from '../../hooks/usePost';
+import * as postService from '../../services/postService';
+
 const Edit = () => {
+    const navigate = useNavigate();
+    const { postId } = useParams();
+
+    const [post, setPost] = usePost(postId);
+
+    const updateHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const title = formData.get('title');
+        const keyword = formData.get('keyword');
+        const location = formData.get('location');
+        const date = formData.get('date');
+        const imageUrl = formData.get('imageUrl');
+        const description = formData.get('description');
+
+        const updatedPost = { title, keyword, location, date, imageUrl, description};
+
+        postService.update(postId, updatedPost)
+            .then(data => {
+                
+                navigate(`/details/${postId}`);
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            })
+
+    }
 
     return (
         <section id="edit-page">
@@ -7,32 +42,32 @@ const Edit = () => {
                     <h2>Edit your own post!</h2>
                 </div>
 
-                <form action="#" method="" className="editForm">
+                <form  method="PUT" className="editForm" onSubmit={updateHandler}>
                     <h2>Edit Post</h2>
                     <ul className="noBullet">
                         <li>
                             <label htmlFor="title">Title:</label>
-                            <input type="text" className="inputFields" id="title" name="title"  />
+                            <input type="text" className="inputFields" id="title" name="title" defaultValue={post.title} />
                         </li>
                         <li>
                             <label htmlFor="key-word">Keyword:</label>
-                            <input type="text" className="inputFields" id="keyword" name="keyword"  />
+                            <input type="text" className="inputFields" id="keyword" name="keyword" defaultValue={post.keyword} />
                         </li>
                         <li>
                             <label htmlFor="location">Location:</label>
-                            <input type="text" className="inputFields" id="location" name="location"  />
+                            <input type="text" className="inputFields" id="location" name="location" defaultValue={post.location} />
                         </li>
                         <li>
                             <label htmlFor="date">Date of creation:</label>
-                            <input type="text" className="inputFields" id="date" name="date"  />
+                            <input type="text" className="inputFields" id="date" name="date" defaultValue={post.date} />
                         </li>
                         <li>
                             <label htmlFor="image">Wildlife image:</label>
-                            <input type="text" className="inputFields" id="image" name="imageUrl"  />
+                            <input type="text" className="inputFields" id="image" name="imageUrl"  defaultValue={post.imageUrl}/>
                         </li>
                         <li>
                             <label htmlFor="description">Description:</label>
-                            <textarea id="description" className="inputFields" name="description"></textarea>
+                            <textarea id="description" className="inputFields" name="description" defaultValue={post.description} />
                         </li>
                         <li id="center-btn">
                             <button id="edit-btn">Update</button>

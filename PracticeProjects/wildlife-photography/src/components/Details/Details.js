@@ -7,7 +7,7 @@ import * as postService from '../../services/postService';
 const Details = () => {
     const navigate = useNavigate();
     const { postId } = useParams();
-    const [post, setPost] = usePost(postId);
+    const [post] = usePost(postId);
     const { user } = useAuthContext();
 
     const deleteHandler = (e) => {

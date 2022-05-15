@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 
 import * as authService from '../../services/authService';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
 
 const Register = () => {
     const navigate = useNavigate();
     const { login } = useAuthContext();
+    const { showNotification } =  useNotificationContext();
 
     const registerHandler = (e) => {
         e.preventDefault();
@@ -26,6 +28,7 @@ const Register = () => {
         authService.register(email, password, firstName, lastName)
             .then(data => {
                 login(data);
+                showNotification('Your registration is successfull!', types.success);
                 navigate('/');
             } )
         

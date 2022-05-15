@@ -2,10 +2,12 @@ import { useNavigate } from 'react-router-dom';
 
 import * as postService from '../../services/postService';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
 const Create = () => {
     const navigate = useNavigate();
     const { user } = useAuthContext();
+    const { showNotification } = useNotificationContext();
 
     const name = `${user.firstName} ${user.lastName}`;
 
@@ -22,15 +24,19 @@ const Create = () => {
         const description = formData.get('description');
 
         if(title == '' || keyword == '' || location == '' || date=='' || imageUrl == '' || description == '') {
+            showNotification('All fields are required', types.warn);
             throw new Error('All fields are required');
+
         }
 
         postService.create({ title, keyword, location, date, imageUrl, description, name })
             .then(res => {
+                showNotification('You have successfully created a new post!', types.success);
                 navigate('/dashboard');
             })
             .catch(err => {
                 console.log(err.message);
+                showNotification(err.message, types.warn);
                 return;
             })
     }

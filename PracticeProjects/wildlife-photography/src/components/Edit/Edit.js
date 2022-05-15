@@ -2,12 +2,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import usePost from '../../hooks/usePost';
 import * as postService from '../../services/postService';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
 const Edit = () => {
     const navigate = useNavigate();
     const { postId } = useParams();
-
     const [post] = usePost(postId);
+    const { showNotification } = useNotificationContext()
 
     const updateHandler = (e) => {
         e.preventDefault();
@@ -25,11 +26,12 @@ const Edit = () => {
 
         postService.update(postId, updatedPost)
             .then(data => {
-                
+                showNotification('You have successfully updated the post', types.success);
                 navigate(`/details/${postId}`);
             })
             .catch(err => {
                 console.error(err.message);
+                showNotification(err.message, types.error);
                 return;
             })
 

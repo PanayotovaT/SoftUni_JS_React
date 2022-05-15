@@ -16,36 +16,41 @@ import PublicRoute from './common/PublicRoute';
 import PrivateRoute from './common/PrivateRoute';
 import NotFound from './components/NotFound/NotFound';
 
+import { NotificationProvider } from './contexts/NotificationContext';
+import Notification from './common/Notification';
+
 function App() {
   return (
-    <AuthProvider>
+    <NotificationProvider>
+      <AuthProvider>
 
-      <div className="site-wrapper">
-        <Header />
-        <main>
-          <Routes>
-            <Route path="*" element={<NotFound />} />
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route element={<PublicRoute />} >
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
+        <div className="site-wrapper">
+          <Header />
+          <Notification />
+          <main>
+            <Routes>
+              <Route path="*" element={<NotFound />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route element={<PublicRoute />} >
+                <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
 
-            </Route>
-            <Route element={<PrivateRoute />} >
-              <Route path="/create" element={<Create />} />
-              <Route path="/details/:postId" element={<Details />} />
-              <Route path="/edit/:postId" element={<Edit />} />
-              <Route path="/my-posts" element={<MyPosts />} />
-              <Route path="/logout" element={<Logout />} />
-            </Route>
+              </Route>
+              <Route element={<PrivateRoute />} >
+                <Route path="/create" element={<Create />} />
+                <Route path="/details/:postId" element={<Details />} />
+                <Route path="/edit/:postId" element={<Edit />} />
+                <Route path="/my-posts" element={<MyPosts />} />
+                <Route path="/logout" element={<Logout />} />
+              </Route>
 
-          </Routes>
+            </Routes>
 
-        </main>
-
-      </div>
-    </AuthProvider>
+          </main>
+        </div>
+      </AuthProvider>
+    </NotificationProvider>
   );
 }
 

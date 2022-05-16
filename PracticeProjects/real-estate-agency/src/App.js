@@ -13,33 +13,38 @@ import NotFound from './components/NotFound/NotFound';
 import Register from './components/Register/Register';
 import Search from './components/Search/Search';
 
+import { AuthContextProvider } from './contexts/AuthContext';
+
 function App() {
   return (
-    <div className="site-wrapper">
-      <Header />
+    <AuthContextProvider>
 
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/edit/:estateId" element={<Edit />} />
-          <Route path="/details/:estateId" element={<Details />} />
-          <Route path="/search" element={ <Search /> } />
+      <div className="site-wrapper">
+        <Header />
 
-          <Route path="*" element={ <NotFound />} />
-          
-        </Routes>
-      
-      </main>
-      
-      <footer>
-           <p> © 2021</p>
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/edit/:estateId" element={<Edit />} />
+            <Route path="/details/:estateId" element={<Details />} />
+            <Route path="/search" element={<Search />} />
+
+            <Route path="*" element={<NotFound />} />
+
+          </Routes>
+
+        </main>
+
+        <footer>
+          <p> © 2021</p>
         </footer>
-    </div>
+      </div>
+    </AuthContextProvider>
   );
 }
 

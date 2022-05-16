@@ -1,0 +1,22 @@
+import { NavLink } from 'react-router-dom';
+
+const Header = () => {
+
+    return (
+        <>
+            <nav>
+                <NavLink to="/">Home</NavLink>
+                <ul>
+                    <li><NavLink to="/dashboard">Housing for rent</NavLink></li>
+                    <li><NavLink to="/login">Login</NavLink></li>
+                    <li><NavLink to="/register">Register</NavLink></li>
+                    <li><NavLink to="/create">Create offer</NavLink></li>
+                    <li><NavLink to="/search">Search</NavLink></li>
+                    <li><NavLink to="/logout">Logout</NavLink></li>
+                </ul>
+            </nav>
+        </>
+    )
+}
+
+export default Header;

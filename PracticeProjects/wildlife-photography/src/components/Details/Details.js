@@ -5,7 +5,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import usePost from '../../hooks/usePost';
 import * as postService from '../../services/postService';
 import * as votesService from '../../services/votesServce';
-// import { useNotificationContext, types } from '../../contexts/NotificationContext';
+import { useNotificationContext, types } from '../../contexts/NotificationContext';
 
 const Details = () => {
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Details = () => {
     const [likes, setLikes] = useState([]);
     const [dislikes, setDislikes] = useState([]);
     const [hasVoted, setHasVoted] = useState(false);
-    // const { showNotification } = useNotificationContext();
+    const { showNotification } = useNotificationContext();
 
     const voter = { postId, userId: user._id, email: user.email };
     useEffect(() => {
@@ -65,6 +65,7 @@ const Details = () => {
         await votesService.addLike(voter);
         setLikes(s => ([...s, voter]));
         setHasVoted(true);
+        showNotification('You have successfully liked this post', types.success);
 
     }
 
@@ -73,6 +74,7 @@ const Details = () => {
         await votesService.dislike(voter);
         setDislikes(s => ([...s, voter]));
         setHasVoted(true);
+        showNotification('You have successfully disliked this post', types.success);
 
     }
     const ownerLinks = (

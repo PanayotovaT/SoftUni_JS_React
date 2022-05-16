@@ -8,8 +8,10 @@ import Edit from './components/Edit/Edit';
 import Header from "./components/Header/Header";
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
+import Logout from './components/Logout/Logout';
 import NotFound from './components/NotFound/NotFound';
 import Register from './components/Register/Register';
+import Search from './components/Search/Search';
 
 function App() {
   return (
@@ -19,12 +21,15 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/create" element={<Create />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
-          <Route path="/details/:estateId" element={<Details />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/create" element={<Create />} />
           <Route path="/edit/:estateId" element={<Edit />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/details/:estateId" element={<Details />} />
+          <Route path="/search" element={ <Search /> } />
+
           <Route path="*" element={ <NotFound />} />
           
         </Routes>

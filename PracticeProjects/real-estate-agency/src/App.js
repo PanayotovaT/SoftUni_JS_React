@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Create from './components/Create/Create';
+import Details from './components/Details/Details';
 
 import Header from "./components/Header/Header";
 import Home from './components/Home/Home';
@@ -17,11 +18,16 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path="/login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/details/:estateId" element={<Details />} />
 
           
         </Routes>
       
       </main>
+      
+      <footer>
+           <p> © 2021</p>
+        </footer>
     </div>
   );
 }

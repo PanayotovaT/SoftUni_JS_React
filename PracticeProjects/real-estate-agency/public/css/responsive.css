@@ -8,9 +8,9 @@
     section {
         margin: 1rem 3em;
     }
-    footer {
+    /* footer {
         display: none;
-    }
+    } */
 }
 
 @media (max-width: 1000px) {
@@ -27,7 +27,7 @@
     section {
         margin: 1rem 3em;
     }
-    footer {
+    /* footer {
         display: none;
-    }
+    } */
 }

@@ -18,6 +18,7 @@ const Logout = () => {
                 navigate('/login');
             })
             .catch(err => {
+                logout();
                 return;
             });
     }, [ logout, navigate, showNotification ]);

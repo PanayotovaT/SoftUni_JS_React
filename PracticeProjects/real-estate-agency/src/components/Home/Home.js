@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 
+
+import CardHome from './CardHome';
+
 const Home = () => {
 
     return (

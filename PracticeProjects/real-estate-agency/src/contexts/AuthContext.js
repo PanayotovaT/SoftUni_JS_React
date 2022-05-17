@@ -14,7 +14,7 @@ export const AuthContextProvider  = ({ children}) => {
 
     const login = (authData) => setUser(authData);
 
-    const logout = () => setUser('user', initialUser);
+    const logout = () => setUser(initialUser);
 
     return <AuthContext.Provider value={{user, login, logout}} >
         {children}

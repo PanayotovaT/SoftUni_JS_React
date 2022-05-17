@@ -37,7 +37,7 @@ const getOptions = (method='GET', body) => {
         return err;
     }
 
-    if(token) {
+    if(token.accessToken) {
         options.headers['X-Authorization'] = JSON.parse(token).accessToken;
     }
 

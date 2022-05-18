@@ -2,7 +2,7 @@ import CardHome from './CardHome';
 import useEstates from '../../hooks/useEstates';
 
 const Home = () => {
-    const [estates, setEstates] = useEstates();
+    const [estates] = useEstates();
 
     return (
         <>

@@ -1,21 +1,25 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+
+import useEstate from '../../hooks/useEstate';
 
 const Details = () => {
+    const { estateId } = useParams()
+    const [estate ] = useEstate(estateId);
 
     return (
         <section id="deatils-page">
         <div className="wrapper">
             <div className="product-img">
-                <img src="/images/apartments.jpg" alt="appartments" />
+                <img src={estate.imageUrl} alt="appartments" />
             </div>
             <div className="product-info">
                 <div className="product-text">
                     <div className="product-text">
-                        <h1>Name: Sunhouse C21</h1>
-                        <h2>Type: Apartment</h2>
-                        <h4>Year: 2021</h4>
-                        <h4>City: Sofia</h4>
-                        <p>Description: Spacious dining room, remodel kitchen and wonderful deeded walk-out deck.</p>
+                        <h1>Name: {estate.name}</h1>
+                        <h2>Type: {estate.type}</h2>
+                        <h4>Year: {estate.year}</h4>
+                        <h4>City: {estate.city}</h4>
+                        <p>Description: {estate.description}</p>
 
                         <p>People rented this housing: Alex Petkov, Ivan Dobrev</p>
 

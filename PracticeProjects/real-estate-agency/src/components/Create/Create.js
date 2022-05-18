@@ -14,7 +14,7 @@ const Create = () => {
         
         estateService.create(data)
             .then(res => {
-                navigate('/dashboard');
+                navigate(`/details/${res._id}`);
             })
             .catch(err => {
                 console.error(err.message)

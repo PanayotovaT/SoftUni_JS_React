@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import SearchCard from './SearchCard';
 import * as estateService from '../../services/estateService';
@@ -6,13 +7,19 @@ import * as estateService from '../../services/estateService';
 
 const Search = () => {
     const [estates, setEstates] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const searchHandler = (e) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const searchedData = formData.get('searchedData');
 
-        estateService.searchItems(searchedData)
+        const encodedSearchString = encodeURI(`?where=name LIKE "${searchedData}"`);
+        const encodedSearchedParams = encodeURI(`?where=name=${searchedData}"`);
+
+        setSearchParams(encodedSearchedParams);
+
+        estateService.searchItems(encodedSearchString)
             .then(res => {
                 setEstates(res);
             })

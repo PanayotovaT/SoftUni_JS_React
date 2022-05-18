@@ -12,8 +12,4 @@ export const update  =  async (id, data) => await request.put(`${baseUrl}/${id}`
 
 export const deleteItem = async (id) => await request.del(`${baseUrl}/${id}`);
 
-export const searchItems = async (searchedData) => {
-
-    const queryString = encodeURI(`?where=name LIKE "${searchedData}"`);
-    return await request.get(`${baseUrl}${queryString}`);
-}
+export const searchItems = async (searchedData) =>  await request.get(`${baseUrl}${searchedData}`);

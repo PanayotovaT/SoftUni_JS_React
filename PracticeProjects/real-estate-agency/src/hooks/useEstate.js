@@ -12,8 +12,8 @@ const useEstate = () => {
             .then(res => {
                 setEstate(res);
             })
-    }, [])
-
+    }, [estateId]);
+  
     return [estate, setEstate];
 }
 

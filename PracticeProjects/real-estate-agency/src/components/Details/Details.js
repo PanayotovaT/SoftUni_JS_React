@@ -1,19 +1,35 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 import useEstate from '../../hooks/useEstate';
 import { useAuthContext } from '../../contexts/AuthContext';
+import * as estateService from '../../services/estateService';
 
 const Details = () => {
+    const navigate = useNavigate();
     const { estateId } = useParams()
     const [estate] = useEstate(estateId);
     const { user } = useAuthContext();
     const [rents, setSents] = useState([]);
 
+    const deleteHandler = (e) => {
+        e.preventDefault();
+
+        estateService.deleteItem(estateId)
+            .then(res => {
+               navigate('/');
+            })
+            .catch(err => {
+                console.log(err.message);
+                return;
+            })
+
+    }
+
     const ownerButtons = (
         <>
-            <Link to="/edit/123" className="edit">Edit</Link>
-            <Link to="/delete/123" className="remove">Delete</Link>
+            <Link to={`/edit/${estate._id}`} className="edit">Edit</Link>
+            <Link to={`/delete/${estate._id}`} className="remove" onClick={deleteHandler}>Delete</Link>
         </>
     );
 
@@ -44,9 +60,6 @@ const Details = () => {
                                 ? <p>People rented this housing: {rents.map(x => x.name).join(', ')}</p>
                                 : <p>People rented this housing: There are no tenants yet.</p>
                             }
-                            
-
-                            
                         </div>
                     </div>
 
@@ -55,7 +68,6 @@ const Details = () => {
                             ? ownerButtons
                             : userButtons
                         }
-
                     </div>
                 </div>
             </div>

@@ -8,20 +8,22 @@ import * as estateService from '../../services/estateService';
 const Search = () => {
     const [estates, setEstates] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [name, setName] = useState('');
 
     const searchHandler = (e) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const searchedData = formData.get('searchedData');
+        // const formData = new FormData(e.currentTarget);
+        // const searchedData = formData.get('searchedData');
 
-        const encodedSearchString = encodeURI(`?where=name LIKE "${searchedData}"`);
-        const encodedSearchedParams = encodeURI(`?where=name=${searchedData}"`);
+        const encodedSearchString = encodeURI(`?where=name LIKE "${name}"`);
+        const encodedSearchedParams = encodeURI(`?where=name=${name}`);
 
         setSearchParams(encodedSearchedParams);
 
         estateService.searchItems(encodedSearchString)
             .then(res => {
                 setEstates(res);
+                setName('');
             })
             .catch(err => {
                 console.error(err.message);
@@ -29,10 +31,13 @@ const Search = () => {
             })
     }
 
+    const searchInputHandler = (e) => {
+        setName(e.currentTarget.value);
+    }
     return (
         <>
-            <form className="search" method="POST" onSubmit={searchHandler}>
-                <input type="search" name="searchedData" placeholder="Search here..." />
+            <form className="search" method="GET" onSubmit={searchHandler}>
+                <input type="search" name="searchedData" placeholder="Search here..." value={name} onChange={searchInputHandler}/>
                 <button type="submit" >Search</button>
             </form>
             <section id="find-section">

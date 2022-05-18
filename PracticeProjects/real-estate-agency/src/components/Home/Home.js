@@ -1,22 +1,8 @@
-import { useState, useEffect } from 'react';
-
 import CardHome from './CardHome';
-import * as estateService from '../../services/estateService';
+import useEstates from '../../hooks/useEstates';
 
 const Home = () => {
-    const [estates, setEstates] = useState([]);
-
-    useEffect(() => {
-        estateService.getAll()
-            .then(res => {
-                console.log(res)
-                setEstates(res)
-            })
-            .catch(err => {
-                console.error(err.message);
-                return;
-            });
-    }, [])
+    const [estates, setEstates] = useEstates();
 
     return (
         <>

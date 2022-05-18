@@ -1,22 +1,9 @@
-import { useState, useEffect } from 'react';
-
 import DashboardCard from './DashboardCard';
-import * as estateService from '../../services/estateService';
+import useEstates from '../../hooks/useEstates';
 
 const Dashboard = () => {
-    const [estates, setEstates] = useState([]);
-
-    useEffect(() => {
-        estateService.getAll()
-            .then(res => {
-                setEstates(res);
-            })
-            .catch(err => {
-                console.error(err.message);
-                return;
-            })
-    }, []);
-
+    const [ estates ] = useEstates();
+    
     return (
         <section id="all-listings">
             <h1>Apartments for recents</h1>

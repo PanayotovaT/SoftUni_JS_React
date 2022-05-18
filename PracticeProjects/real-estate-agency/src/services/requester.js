@@ -31,22 +31,22 @@ const getOptions = (method='GET', body) => {
     let token  = null;
 
     try {
-        token = localStorage.getItem('user');
+        let user = localStorage.getItem('user');
+        if(user) {
+            token = JSON.parse(user).accessToken;
+            options.headers['X-Authorization'] =  token;
+        }
 
     } catch(err) {
         return err;
     }
 
-    if(token.accessToken) {
-        options.headers['X-Authorization'] = JSON.parse(token).accessToken;
-    }
 
     if(body){
 
         options.headers['Content-Type'] = 'application/json'
         options.body = JSON.stringify(body);
     }
-
     return options;
 }
 

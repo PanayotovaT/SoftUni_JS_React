@@ -5,7 +5,8 @@ import * as estateService from '../services/estateService';
 
 const useEstate = () => {
     const [estate, setEstate] = useState({});
-    const { estateId } = useParams()
+
+    const { estateId } = useParams();
 
     useEffect(() => {
         estateService.getOne(estateId)

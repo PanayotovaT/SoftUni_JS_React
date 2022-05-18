@@ -1,5 +1,27 @@
-const Create = () => {
+import { useNavigate } from 'react-router-dom';
 
+import * as estateService from '../../services/estateService';
+
+const Create = () => {
+    const navigate = useNavigate();
+
+    const craeteHandler = (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const {name, city, description, availablePieces, imageUrl, type, year} = Object.fromEntries(formData);
+        const data = {name, city, description, availablePieces, imageUrl, type, year}
+        
+        estateService.create(data)
+            .then(res => {
+                navigate('/dashboard');
+            })
+            .catch(err => {
+                console.error(err.message)
+                return;
+            })
+
+    }
     return (
         <section id="create-page">
         <div className="create-container">
@@ -8,7 +30,7 @@ const Create = () => {
             <h2 className="box-heading"> Add new home</h2>
 
 
-            <form className="form" method="POST">
+            <form className="form" method="POST" onSubmit={craeteHandler}>
                 <div className="input">
                     <input type="text" className="input-field" id="home-name" placeholder="Real House Luxury Villa..." name="name" />
                     <label className="home-name">Name:</label>

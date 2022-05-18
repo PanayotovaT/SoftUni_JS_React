@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import useEstate from '../../hooks/useEstate';
 import { useAuthContext } from '../../contexts/AuthContext';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 import * as estateService from '../../services/estateService';
 import * as rentService from '../../services/rentService';
 
@@ -12,6 +13,7 @@ const Details = () => {
     const [estate] = useEstate(estateId);
     const { user } = useAuthContext();
     const [rents, setRents] = useState([]);
+    const { showNotification } = useNotificationContext();
    
     const availableRents = Number(estate.availablePieces) - rents.length;
 
@@ -31,6 +33,7 @@ const Details = () => {
 
         estateService.deleteItem(estateId)
             .then(res => {
+                showNotification('You have successfully deleted the estate!')
                 navigate('/');
             })
             .catch(err => {
@@ -49,6 +52,7 @@ const Details = () => {
         }
         rentService.rentEstate(data)
             .then(res => {
+                showNotification('You have successfully rented the estate!')
                 setRents(s => [...s, data]);
             })
             .catch(err => {

@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
 import * as estateService from '../../services/estateService';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 const Create = () => {
     const navigate = useNavigate();
+    const { showNotification } =  useNotificationContext();
 
     const craeteHandler = (e) => {
         e.preventDefault();
@@ -14,10 +16,11 @@ const Create = () => {
         
         estateService.create(data)
             .then(res => {
+                showNotification('You have successfully created the estate!');
                 navigate(`/details/${res._id}`);
             })
             .catch(err => {
-                console.error(err.message)
+                showNotification(err.message);
                 return;
             })
 

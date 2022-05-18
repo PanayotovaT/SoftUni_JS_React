@@ -16,40 +16,44 @@ import Search from './components/Search/Search';
 import { AuthContextProvider } from './contexts/AuthContext';
 import PrivateGuard from './common/PrivateGuard';
 import PublicGuard from './common/PublicGuard';
+import { NotificationProvider } from './contexts/NotificationContext';
+import NotificationSection from './common/NotificationSection';
 
 function App() {
   return (
-    <AuthContextProvider>
+    <NotificationProvider>
+      <AuthContextProvider>
 
-      <div className="site-wrapper">
-        <Header />
+        <div className="site-wrapper">
+          <Header />
+          <NotificationSection />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route element={<PublicGuard />}>
+                <Route path="/login" element={<Login />} />
+                <Route path="/Register" element={<Register />} />
+              </Route>
+              <Route element={<PrivateGuard />} >
+                <Route path="/create" element={<Create />} />
+                <Route path="/edit/:estateId" element={<Edit />} />
+                <Route path="/details/:estateId" element={<Details />} />
+                <Route path="/search" element={<Search />} />
+                <Route path="/logout" element={<Logout />} />
+              </Route>
+              <Route path="/not-found" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
 
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route element={<PublicGuard />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/Register" element={<Register />} />
-            </Route>
-            <Route element={<PrivateGuard />} >
-              <Route path="/create" element={<Create />} />
-              <Route path="/edit/:estateId" element={<Edit />} />
-              <Route path="/details/:estateId" element={<Details />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/logout" element={<Logout />} />
-            </Route>
-            <Route path="/not-found" element={<NotFound />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          </main>
 
-        </main>
-
-        <footer>
-          <p> © 2021</p>
-        </footer>
-      </div>
-    </AuthContextProvider>
+          <footer>
+            <p> © 2021</p>
+          </footer>
+        </div>
+      </AuthContextProvider>
+    </NotificationProvider>
   );
 }
 

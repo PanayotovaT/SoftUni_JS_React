@@ -24,7 +24,7 @@ body {
     box-sizing: inherit;
 }
 
-.errorContainer {
+.notificationContainer {
     position: fixed;
     right: 10px;
     min-width: 100px;
@@ -41,14 +41,14 @@ body {
     padding: 1em;
 }
 
-.errorContainer>p {
-    background: #F50;
-    font-size: 23px;
-    padding: 20px;
+.notificationContainer>p {
+    background: rgb(243, 186, 0);
+    font-size: 20px;
+    padding: 15px;
     height: auto;
 }
 
-.errorContainer {
+.notificationContainer {
     -moz-animation: cssAnimation 0s ease-in 2s forwards;
     /* Firefox */
     -webkit-animation: cssAnimation 0s ease-in 2s forwards;

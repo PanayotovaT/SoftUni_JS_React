@@ -2,12 +2,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import useEstate from '../../hooks/useEstate';
 import * as estateService from '../../services/estateService';
+import { useNotificationContext } from '../../contexts/NotificationContext';
 
 const Edit = () => {
     const navigate = useNavigate();
     const { estateId } = useParams();
     const [estate] = useEstate(estateId);
-
+    const { showNotification } = useNotificationContext()
 
     const updateHandler = (e) => {
         e.preventDefault();
@@ -18,10 +19,11 @@ const Edit = () => {
 
         estateService.update(estateId, data)
             .then(res => {
+                showNotification('You have updated successfully the estate!');
                 navigate(`/details/${estateId}`);
             })
             .catch(err => {
-                console.error(err.message);
+                showNotification(err.message);
                 return;
             })
 

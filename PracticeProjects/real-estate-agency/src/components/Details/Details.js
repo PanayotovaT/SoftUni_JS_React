@@ -12,25 +12,26 @@ const Details = () => {
     const [estate] = useEstate(estateId);
     const { user } = useAuthContext();
     const [rents, setRents] = useState([]);
+   
+    const availableRents = Number(estate.availablePieces) - rents.length;
 
     useEffect(() => {
         rentService.getRents(estateId)
-            .then(res =>{
+            .then(res => {
                 setRents(res)
             })
             .catch(err => {
-                console.error(err.message);
                 return;
             })
 
-    },[estateId]);
+    }, [estateId]);
 
     const deleteHandler = (e) => {
         e.preventDefault();
 
         estateService.deleteItem(estateId)
             .then(res => {
-               navigate('/');
+                navigate('/');
             })
             .catch(err => {
                 console.log(err.message);
@@ -41,6 +42,19 @@ const Details = () => {
 
     const rentEstateHandler = (e) => {
         e.preventDefault();
+        const data = {
+            estateId,
+            userId: user._id,
+            name: user.name
+        }
+        rentService.rentEstate(data)
+            .then(res => {
+                setRents(s => [...s, data]);
+            })
+            .catch(err => {
+                console.log(err);
+                return;
+            })
 
 
     }
@@ -54,10 +68,20 @@ const Details = () => {
 
     const userButtons = (
         <>
-            <Link to={`/rent/${estate._id}`} className="rentHome" onClick={rentEstateHandler}>Rent a home, available 2 housing</Link>
-            <p className="alRentHome">You have already rent this home</p>
+            {rents.some(x => x.userId == user._id)
+                ? <p className="alRentHome">You have already rent this home</p>
+                : (
+                    <>
+                        {availableRents > 0 
+                            ?<Link to={`/rent/${estate._id}`} className="rentHome" onClick={rentEstateHandler}>Rent a home, available {availableRents} housing</Link>
+                            : <p className="no-housing">No Housing Available!</p>
+                        }
+                        
+                        
+                    </>
+                )
+            }
 
-            <p className="no-housing">No Housing Available!</p>
         </>
     )
 
@@ -75,7 +99,7 @@ const Details = () => {
                             <h4>Year: {estate.year}</h4>
                             <h4>City: {estate.city}</h4>
                             <p>Description: {estate.description}</p>
-                            {rents.length > 0 
+                            {rents.length > 0
                                 ? <p>People rented this housing: {rents.map(x => x.name).join(', ')}</p>
                                 : <p>People rented this housing: There are no tenants yet.</p>
                             }

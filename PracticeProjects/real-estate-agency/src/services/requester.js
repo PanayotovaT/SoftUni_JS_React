@@ -31,9 +31,9 @@ const getOptions = (method='GET', body) => {
     let token  = null;
 
     try {
-        let user = localStorage.getItem('user');
-        if(user) {
-            token = JSON.parse(user).accessToken;
+        let user = JSON.parse(localStorage.getItem('user'));
+        token = user.accessToken;
+        if(token) {
             options.headers['X-Authorization'] =  token;
         }
 

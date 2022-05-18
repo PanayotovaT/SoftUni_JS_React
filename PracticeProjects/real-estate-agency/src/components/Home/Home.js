@@ -1,9 +1,22 @@
-import { Link } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
 
 import CardHome from './CardHome';
+import * as estateService from '../../services/estateService';
 
 const Home = () => {
+    const [estates, setEstates] = useState([]);
+
+    useEffect(() => {
+        estateService.getAll()
+            .then(res => {
+                console.log(res)
+                setEstates(res)
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            });
+    }, [])
 
     return (
         <>
@@ -21,16 +34,10 @@ const Home = () => {
             <section id="top-houses">
                 <h1>Top Houses</h1>
                 <div className="houses">
-
-
-                    <div className="card-home">
-                        <h2>Sunhouse C21</h2>
-                        <div className="cta-container"><Link to="/details/123" className="details-link">Details</Link></div>
-                        <div className="card_image"><img src="/images/apartments.jpg" alt="test" /></div>
-
-                    </div>
-
-                    <p className="no-data">There are no housing offers found...</p>
+                    {estates.length > 0
+                        ? estates.map(x => <CardHome key={x._id} card={x} />)
+                        : <p className="no-data">There are no housing offers found...</p>
+                    }
                 </div>
             </section >
         </>

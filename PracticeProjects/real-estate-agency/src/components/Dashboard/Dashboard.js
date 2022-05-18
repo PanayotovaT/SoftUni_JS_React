@@ -1,6 +1,22 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect} from 'react';
+import useEstate from '../../hooks/useEstate';
+
+import DashboardCard from './DashboardCard';
+import * as estateService from '../../services/estateService';
 
 const Dashboard = () => {
+    const [estates, setEstates] = useEstate([]);
+
+    useEffect (() => {
+        estateService.getAll()
+            .then(res => {
+                setEstates(res);
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            })
+    }, []);
 
     return (
         <section id="all-listings">

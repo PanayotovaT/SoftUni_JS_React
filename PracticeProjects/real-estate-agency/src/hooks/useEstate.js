@@ -1,10 +1,11 @@
-import { useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import * as estateService from '../services/estateService';
 
 const useEstate = () => {
     const [estate, setEstate] = useState({});
+    const navigate = useNavigate()
 
     const { estateId } = useParams();
 
@@ -13,7 +14,10 @@ const useEstate = () => {
             .then(res => {
                 setEstate(res);
             })
-    }, [estateId]);
+            .catch(err => {
+                return navigate('/not-found');
+            })
+    }, [estateId, navigate]);
   
     return [estate, setEstate];
 }

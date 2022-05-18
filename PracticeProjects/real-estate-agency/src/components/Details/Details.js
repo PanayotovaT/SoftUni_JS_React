@@ -1,16 +1,29 @@
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import useEstate from '../../hooks/useEstate';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as estateService from '../../services/estateService';
+import * as rentService from '../../services/rentService';
 
 const Details = () => {
     const navigate = useNavigate();
     const { estateId } = useParams()
     const [estate] = useEstate(estateId);
     const { user } = useAuthContext();
-    const [rents, setSents] = useState([]);
+    const [rents, setRents] = useState([]);
+
+    useEffect(() => {
+        rentService.getRents(estateId)
+            .then(res =>{
+                setRents(res)
+            })
+            .catch(err => {
+                console.error(err.message);
+                return;
+            })
+
+    },[estateId]);
 
     const deleteHandler = (e) => {
         e.preventDefault();
@@ -26,6 +39,12 @@ const Details = () => {
 
     }
 
+    const rentEstateHandler = (e) => {
+        e.preventDefault();
+
+
+    }
+
     const ownerButtons = (
         <>
             <Link to={`/edit/${estate._id}`} className="edit">Edit</Link>
@@ -35,7 +54,7 @@ const Details = () => {
 
     const userButtons = (
         <>
-            <Link to="/rent/123" className="rentHome">Rent a home, available 2 housing</Link>
+            <Link to={`/rent/${estate._id}`} className="rentHome" onClick={rentEstateHandler}>Rent a home, available 2 housing</Link>
             <p className="alRentHome">You have already rent this home</p>
 
             <p className="no-housing">No Housing Available!</p>

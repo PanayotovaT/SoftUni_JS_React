@@ -29,6 +29,14 @@
 
 }
 
+.active-header-link {
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color:rgb(92, 0, 0);
+}
+
 .header-list-item-link:hover {
     font-size: 24px;
     /* text-transform: uppercase; */

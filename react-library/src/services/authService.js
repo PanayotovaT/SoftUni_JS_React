@@ -23,7 +23,25 @@ export const register = async (email, gender, password) => {
 }
 
 export const login = (email, password) => {
+    try {
+        const response = await fetch(`${baseUrl}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
 
+        const result = await response.json();
+        if (result.ok) {
+            return result;
+        } else {
+            throw result.message;
+        }
+    } catch (err) {
+        console.log(err);
+        return;
+    }
 }
 
 export const getUser = () => localStorage.getItem('username')

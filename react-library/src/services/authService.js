@@ -1,5 +1,3 @@
-import { response } from "express";
-
 const baseUrl = 'http://localhost:3030/users';
 
 export const register = async (email, gender, password) => {

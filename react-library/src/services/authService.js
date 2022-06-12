@@ -1,3 +1,5 @@
+import { response } from "express";
+
 const baseUrl = 'http://localhost:3030/users';
 
 export const register = async (email, gender, password) => {
@@ -22,7 +24,7 @@ export const register = async (email, gender, password) => {
 
 }
 
-export const login = (email, password) => {
+export const login = async (email, password) => {
     try {
         const response = await fetch(`${baseUrl}/login`, {
             method: 'POST',
@@ -48,6 +50,19 @@ export const getUser = () => localStorage.getItem('username')
 
 export const isAuthenticated = () => Boolean(getUser());
 
-export const logout = () => {
+export const logout = async (token) => {
+    try {
+        const response = await fetch(`${baseUrl}/logout`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Authorization': token
+            }
+        })
+        return response;
+    } catch (err) {
+        console.error(err);
+        return;
+    }
 
 }

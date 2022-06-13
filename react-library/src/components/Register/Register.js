@@ -23,6 +23,14 @@ const Register = () => {
                         <label htmlFor="repass" className="repass-label">Repeat Password</label>
                         <input type="repass" name="repass" className="repass-input" id="repass" />
                     </div>
+                    <div className="field">
+                        <span className="check-span">Gender: </span>
+                        <label htmlFor="female" className="label-check">Female</label>
+                        <input type="radio" name="gender" className="label-input female" id="female" value="Female" />
+                        <label htmlFor="male" className="label-check">Male</label>
+                        <input type="radio" name="gender" className="label-input" id="male" value="Male" />
+                       
+                    </div>
                     <input type="submit" className="register-btn" value="Register" />
                 </fieldset>
             </form>

@@ -28,6 +28,27 @@ input {
     margin: 30px 20px;
 }
 
+.check-span {
+    width: 200px;
+    display: inline-block;
+    margin-right: 30px;
+  
+}
+
+.label-check {
+    width: auto;
+    margin-right: 10px;
+}
+
+.label-input.female{
+  margin-right: 30px;
+}
+
+.label-input {
+    width: 25px;
+    height: 25px;
+}
+
 .register-btn {
     width: 300px;
     height: 37.3px;

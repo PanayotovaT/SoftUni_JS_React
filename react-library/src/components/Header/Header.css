@@ -12,6 +12,7 @@
     margin: auto;
     justify-content: space-between;
     padding: 20px;
+    max-width: 1300px;
 }
 
 .header-list-item{

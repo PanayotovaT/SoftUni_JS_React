@@ -1,0 +1,44 @@
+body {
+    background: linear-gradient(90deg, rgba(255,158,120,1) 29%, rgba(220,249,255,1) 100%);
+}
+form {
+    font-size: 24px;
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+    color: #343131;
+}
+
+
+fieldset {
+    margin: 20px auto;
+    width: 800px;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+    margin-right: 30px;
+}
+
+input {
+    width: 300px;
+    height: 36px;
+}
+
+.field {
+    margin: 30px 20px;
+}
+
+.register-btn {
+    width: 300px;
+    height: 37.3px;
+    font-size: 22px;
+    font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+    position: relative;
+    left: 250px;
+    color: #343131;
+    background: #e6f5e5;
+    border: none;
+    box-shadow: 0px 0px 6px -2px black;
+    border-radius: 8px;
+    margin-top: 50px;
+}

@@ -5,14 +5,14 @@ const Login = () => {
             <h2>Login</h2>
             <div>
                 <label htmlFor="username">Username:</label>
-                <input type="text" placeholder="Username"  />
+                <input type="text" placeholder="Username" name="username" />
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="password" placeholder="Password"  />
+                <input type="password" placeholder="Password" name="password" />
             </div>
 
-            <button class="btn" type="submit">Login</button>
+            <button className="btn" type="submit">Login</button>
         </form>
     );
 }

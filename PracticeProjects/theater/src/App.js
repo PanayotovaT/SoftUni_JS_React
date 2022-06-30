@@ -1,4 +1,6 @@
-import  { Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import { AuthProvider } from './contexts/AuthContext';
 import Create from './components/Create/Create';
 import Details from './components/Details/Details';
 
@@ -10,24 +12,27 @@ import Register from './components/Register/Register';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login /> } />
-          <Route path="/register" element={<Register /> } />
-          <Route path="/create" element={<Create />} />
-          <Route path="/details/:id" element= {<Details /> } />
-        </Routes>
-      </main>
-      <footer >
-            <div >© 2020
-                <p>JS Back-End</p>
-            </div>
+    <AuthProvider>
+
+      <div className="App">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/details/:id" element={<Details />} />
+          </Routes>
+        </main>
+        <footer >
+          <div >© 2020
+            <p>JS Back-End</p>
+          </div>
         </footer>
-    </div>
+      </div>
+    </AuthProvider>
   );
-}  
- 
+}
+
 export default App;

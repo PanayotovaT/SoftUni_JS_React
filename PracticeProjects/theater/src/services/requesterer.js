@@ -14,6 +14,7 @@ const request = async (url, options) => {
         }
 
     } catch(err) {
+        console.log(err)
         throw new Error(err.message);
     }
 

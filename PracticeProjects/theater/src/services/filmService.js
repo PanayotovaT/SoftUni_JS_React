@@ -2,7 +2,13 @@ import { get, post, put, del} from './requesterer';
 
 const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = async () => Object.values(await get(`${baseUrl}/films`));
+export const getAll = async () =>{
+    try{
+        Object.values(await get(`${baseUrl}/films`))
+    } catch(err) {
+        return [];
+    }
+};
 
 export const getOne = async (id) => await get(`${baseUrl}/films/${id}`);
 

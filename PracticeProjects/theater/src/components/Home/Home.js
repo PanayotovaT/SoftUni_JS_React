@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext";
+import useFilms from '../../hooks/useFilms';
 
 import GuestCard from './GuestCard';
 import UserCard from './UserCard';
@@ -8,6 +9,7 @@ import UserCard from './UserCard';
 
 const Home = () => {
     const { isAuthenticated } =  useAuthContext();
+    const [films, setFilms] = useFilms();
 
     return (
         <>
@@ -33,9 +35,15 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="theaters-container">
-                    {isAuthenticated 
-                     ? <UserCard card={{title:'hi', imageUrl: 'bubu', likes: 5}} />
-                     : <GuestCard card={{title:'hi', imageUrl: 'bubu', likes: 5}} />}
+                    {films.length > 0 
+                        ?  films.map(x => {
+                            isAuthenticated 
+                                ? <UserCard key={x._id} card={x} />
+                                : <GuestCard key={x._id} card={x} />
+                        })
+                        : 'No films in the database!'
+                    }
+                  
 
                 </div>
             </section>

@@ -1,13 +1,13 @@
-const GuestCard = () => {
+const GuestCard = ({card}) => {
     return (
 
         <div>
             <div className="home-image">
-                <img src={"https://media.timeout.com/images/103727745/380/285/image.jpg"}
+                <img src={card.imageUrl}
                     alt="Card cap" width="400" />
             </div>
             <div className="info">
-                <h4>Death of a Salesman by Arthur Miller</h4>
+                <h4>{card.title}</h4>
             </div>
         </div>
 

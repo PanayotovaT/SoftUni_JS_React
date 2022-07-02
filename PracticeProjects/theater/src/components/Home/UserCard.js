@@ -1,16 +1,18 @@
-const UserCard = () => {
+import { Link } from 'react-router-dom';
+
+const UserCard = ({card}) => {
 
     return (
         <div>
             <div className="home-image">
-                <img src={"https://media.timeout.com/images/103727773/380/285/image.jpg"}
+                <img src={card.imageUrl}
                     alt="Card cap" />
             </div>
             <div className="info">
-                <h4>Cloud 9 by Caryl Churchill</h4>
+                <h4>{card.title}</h4>
                 <div className="info-buttons">
-                    <Link className="btn details" to="/details">Details</Link>
-                    <span className="likes">6 likes</span>
+                    <Link className="btn details" to={`/details/${card._id}`}>Details</Link>
+                    <span className="likes">{card.likes} likes</span>
                 </div>
             </div>
         </div>

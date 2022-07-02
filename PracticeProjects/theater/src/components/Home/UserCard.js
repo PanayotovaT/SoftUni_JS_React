@@ -12,7 +12,7 @@ const UserCard = ({card}) => {
                 <h4>{card.title}</h4>
                 <div className="info-buttons">
                     <Link className="btn details" to={`/details/${card._id}`}>Details</Link>
-                    <span className="likes">{card.likes} likes</span>
+                    <span className="likes">{card.likes.length} likes</span>
                 </div>
             </div>
         </div>

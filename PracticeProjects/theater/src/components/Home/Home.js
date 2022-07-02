@@ -10,6 +10,7 @@ import UserCard from './UserCard';
 const Home = () => {
     const { isAuthenticated } =  useAuthContext();
     const [films, setFilms] = useFilms();
+    console.log(films);
 
     return (
         <>
@@ -36,11 +37,10 @@ const Home = () => {
                 </div>
                 <div className="theaters-container">
                     {films.length > 0 
-                        ?  films.map(x => {
-                            isAuthenticated 
+                        ?  (films.map(x => isAuthenticated 
                                 ? <UserCard key={x._id} card={x} />
                                 : <GuestCard key={x._id} card={x} />
-                        })
+                        ))
                         : 'No films in the database!'
                     }
                   

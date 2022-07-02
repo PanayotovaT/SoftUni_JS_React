@@ -4,7 +4,7 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = async () =>{
     try{
-        Object.values(await get(`${baseUrl}/films`))
+        return Object.values(await get(`${baseUrl}/films`))
     } catch(err) {
         return [];
     }

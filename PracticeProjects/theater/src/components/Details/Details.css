@@ -1,0 +1,16 @@
+.details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 40px;
+
+}
+
+.details-image, .details-text {
+    flex-shrink: 1;
+    flex-basis: 40%;
+}
+
+.details-img {
+width:100%
+}

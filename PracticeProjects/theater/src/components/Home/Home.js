@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+import './Home.css';
 import { useAuthContext } from "../../contexts/AuthContext";
 import useFilms from '../../hooks/useFilms';
 
@@ -35,7 +36,7 @@ const Home = () => {
                         <Link className="btn create-play" to="/sort-by-likes">Sort by Likes</Link>
                     </div>
                 </div>
-                <div className="theaters-container">
+                <div className="theaters-container home-container">
                     {films.length > 0 
                         ?  (films.map(x => isAuthenticated 
                                 ? <UserCard key={x._id} card={x} />

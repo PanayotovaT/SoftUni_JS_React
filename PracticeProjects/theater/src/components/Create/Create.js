@@ -11,12 +11,12 @@ const Create = () => {
         const title = formData.get('title');
         const description = formData.get('description');
         const imageUrl = formData.get('imageUrl');
-        const checked = Boolean(formData.get('check'));
+        const check = Boolean(formData.get('check'));
         const data = {
             title,
             description,
             imageUrl,
-            checked,
+            check,
             likes: []
         }
         createFilm(data)

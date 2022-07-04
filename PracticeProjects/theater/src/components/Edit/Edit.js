@@ -1,25 +1,65 @@
-const Edit = () => {
+import { useNavigate, useParams } from 'react-router-dom';
 
+import useFilm from '../../hooks/useFilm';
+import { updateFilm } from '../../services/filmService';
+
+const Edit = () => {
+    const navigate = useNavigate();
+    const [film, setFilm] = useFilm();
+    const { id } = useParams();
+
+
+    const editHandler = (e) => {
+
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+
+        const title = formData.get('title');
+        const description = formData.get('description');
+        const imageUrl = formData.get('imageUrl');
+        const check = Boolean(formData.get('check'));
+        const data = {
+            title,
+            description,
+            imageUrl,
+            check,
+            likes: film.likes
+        }
+
+        if (title == ''|| description == '' || imageUrl == '') {
+            throw new Error('Missing field');
+        }
+
+        updateFilm(id, data)
+            .then(res => {
+                navigate(`/details/${id}`);
+            })
+            .catch(err => {
+                console.error(err);
+                setFilm({title, description, imageUrl, check});
+            })
+
+    }
     return (
-        <form class="theater-form" method="POST">
+        <form className="theater-form" method="POST" onSubmit={editHandler}>
             <h1>Edit Theater</h1>
             <div>
-                <label for="title">Theater Title:</label>
-                <input type="text" placeholder="Theater name" name="name" />
+                <label htmlFor="title">Theater Title:</label>
+                <input type="text" placeholder="Theater name" name="title" defaultValue={film.title} />
             </div>
             <div>
-                <label for="description">Theater Description:</label>
-                <textarea placeholder="Description" name="description" />
+                <label htmlFor="description">Theater Description:</label>
+                <textarea placeholder="Description" name="description" defaultValue={film.description} />
             </div>
             <div>
-                <label for="imageUrl">Image url:</label>
-                <input type="text" placeholder="Image Url" name="imageUrl" />
+                <label htmlFor="imageUrl">Image url:</label>
+                <input type="text" placeholder="Image Url" name="imageUrl" defaultValue={film.imageUrl}/>
             </div>
-            <div class="check">
-                <input type="checkbox" id="check-box" name="check" />
-                    <label for="check-box">Public</label>
+            <div className="check">
+                <input type="checkbox" id="check-box" name="check" defaultChecked={film.check} />
+                    <label htmlFor="check-box">Public</label>
             </div>
-            <button class="btn" type="submit">Submit</button>
+            <button className="btn" type="submit">Submit</button>
         </form>
     );
 }

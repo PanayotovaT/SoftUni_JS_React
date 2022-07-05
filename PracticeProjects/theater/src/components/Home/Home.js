@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
 
 import './Home.css';
 import { useAuthContext } from "../../contexts/AuthContext";
 import useFilms from '../../hooks/useFilms';
+import { getLikes } from "../../services/likeService";
 
 import GuestCard from './GuestCard';
 import UserCard from './UserCard';
@@ -11,7 +13,14 @@ import UserCard from './UserCard';
 const Home = () => {
     const { isAuthenticated } =  useAuthContext();
     const [films, setFilms] = useFilms();
+    const [likes] = useState([]);
+
     console.log(films);
+
+    useEffect(() => {
+
+  
+    }, [films]);
 
     return (
         <>

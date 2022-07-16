@@ -23,8 +23,8 @@ const Login = () => {
                 login(data);
                 navigate('/');
             }).catch(err => {
-                console.error(err);
-                return;
+                console.log(err.message);
+                return 
             })
 
     }

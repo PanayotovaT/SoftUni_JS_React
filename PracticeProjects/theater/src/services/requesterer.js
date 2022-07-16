@@ -14,9 +14,9 @@ const request = async (url, options) => {
         }
 
     } catch(err) {
-        return;
         // console.log(err)
-        // throw new Error(err.message);
+        // return;
+        throw new Error(err.message);
     }
 
 

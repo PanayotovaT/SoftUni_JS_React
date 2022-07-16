@@ -1,20 +1,23 @@
 import { NavLink } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
 
+import './Header.css'
+
 const Header = () => {
     const { isAuthenticated } = useAuthContext();
+    const isActive = ({isActive}) => isActive ? 'is-active': '';
 
     const guestLinks = (
         <>
-            <li><NavLink to="/login">Login</NavLink></li>
-            <li><NavLink to="/register">Register</NavLink></li>
+            <li><NavLink to="/login" className={isActive}>Login</NavLink></li>
+            <li><NavLink to="/register" className={isActive}>Register</NavLink></li>
         </>
     );
 
     const userLinks = (
         <>
-            <li><NavLink to="/create">Create </NavLink></li>
-            <li><NavLink to="/profile">My Films </NavLink></li>
+            <li><NavLink to="/create" className={isActive}>Create </NavLink></li>
+            <li><NavLink to="/profile" className={isActive}> My Films </NavLink></li>
             <li><NavLink to="logout">Logout</NavLink></li>
         </>
     );
@@ -22,10 +25,10 @@ const Header = () => {
     return (
 
         <nav>
-            <NavLink to="/catalog">Theater</NavLink>
+            <NavLink to="/catalog" className={isActive}> Theater</NavLink>
             <ul>
-                <li><NavLink to="/">Home </NavLink></li>
-                <li><NavLink to="/catalog">Catalog </NavLink></li>
+                <li><NavLink to="/" className={isActive} >Home </NavLink></li>
+                <li><NavLink to="/catalog" className={isActive}>Catalog </NavLink></li>
                 {isAuthenticated 
                     ? userLinks
                     : guestLinks

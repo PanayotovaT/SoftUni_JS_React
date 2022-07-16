@@ -10,6 +10,8 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Logout from './components/Logout/Logout';
 import Edit from './components/Edit/Edit';
+import GuestGuard from './Common/GuestGuard';
+import PrivateRoute from './Common/PrivateRoute';
 
 
 function App() {
@@ -21,12 +23,12 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/create" element={<Create />} />
+            <Route path="/login" element={<GuestGuard><Login /></GuestGuard>} />
+            <Route path="/register" element={<GuestGuard><Register /></GuestGuard>} />
+            <Route path="/logout" element={<PrivateRoute><Logout /></PrivateRoute>} />
+            <Route path="/create" element={<PrivateRoute><Create /></PrivateRoute>} />
             <Route path="/details/:id" element={<Details />} />
-            <Route path="/edit/:id" element={ <Edit /> } />
+            <Route path="/edit/:id" element={ <PrivateRoute><Edit /> </PrivateRoute>} />
           </Routes>
         </main>
         <footer >

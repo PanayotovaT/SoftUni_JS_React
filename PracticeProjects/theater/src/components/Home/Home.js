@@ -8,6 +8,8 @@ import { getLikes } from "../../services/likeService";
 
 import GuestCard from './GuestCard';
 import UserCard from './UserCard';
+import PrivateRoute from "../../Common/PrivateRoute";
+import GuestGuard from "../../Common/GuestGuard";
 
 
 const Home = () => {
@@ -48,8 +50,8 @@ const Home = () => {
                 <div className="theaters-container home-container">
                     {films.length > 0 
                         ?  (films.map(x => isAuthenticated 
-                                ? <UserCard key={x._id} card={x} />
-                                : <GuestCard key={x._id} card={x} />
+                                ?<PrivateRoute><UserCard key={x._id} card={x} /></PrivateRoute>
+                                : <GuestGuard><GuestCard key={x._id} card={x} /></GuestGuard>
                         ))
                         : 'No films in the database!'
                     }
